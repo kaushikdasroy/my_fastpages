@@ -1,1 +1,1 @@
-Sitemap: https://kaushikdasroy.github.io/my_fastpages/sitemap.xml
+Sitemap: https://blog.uplandr.com/sitemap.xml
