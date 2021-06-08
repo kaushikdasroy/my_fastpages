@@ -45,13 +45,13 @@ minima:
     github: kaushikdasroy
 
 # Set this to true to get LaTeX math equation support
-use_math: 
+use_math: true
 
 # Set this to true to display the summary of your blog post under your title on the Home page.
 show_description: true
 
 # Set this to true to display image previews on home page, if they exist
-show_image: false
+show_image: true
 
 # Set this to true to turn on annotations with hypothes.is (https://web.hypothes.is/)
 annotations: false
@@ -73,9 +73,9 @@ include:
 
 # This specifies what badges are turned on by default for notebook posts.
 default_badges:
-  github: true
-  binder: true
-  colab: true
+  github: false
+  binder: false
+  colab: false
 
 # Escape HTML in post descriptions
 html_escape:
