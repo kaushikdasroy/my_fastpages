@@ -41,8 +41,8 @@ baseurl: ""
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: kaushikdasroy
-    github: kaushikdasroy
+    twitter: 
+    github: 
 
 # Set this to true to get LaTeX math equation support
 use_math: true
