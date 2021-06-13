@@ -2,7 +2,6 @@
 layout: page
 title: About Me
 permalink: /about/
-hide: true
 ---
 
 This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
