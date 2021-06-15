@@ -4,18 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Everything Technical | Amazing technology</title>
+<title>Neural Network to recognize MNIST dataset using PyTorch | Everything Technical</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Everything Technical" />
+<meta property="og:title" content="Neural Network to recognize MNIST dataset using PyTorch" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Amazing technology" />
-<meta property="og:description" content="Amazing technology" />
-<link rel="canonical" href="https://blog.uplandr.com/" />
-<meta property="og:url" content="https://blog.uplandr.com/" />
+<meta name="description" content="Step by step process to use neural network to recognize MINST handwritten numbers" />
+<meta property="og:description" content="Step by step process to use neural network to recognize MINST handwritten numbers" />
+<link rel="canonical" href="https://blog.uplandr.com/pytorch/jupyter/2021/06/14/pytorch-cnn-mnist.html" />
+<meta property="og:url" content="https://blog.uplandr.com/pytorch/jupyter/2021/06/14/pytorch-cnn-mnist.html" />
 <meta property="og:site_name" content="Everything Technical" />
-<meta property="og:image" content="https://blog.uplandr.com/images/logo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-14T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"Amazing technology","url":"https://blog.uplandr.com/","@type":"WebSite","headline":"Everything Technical","image":"https://blog.uplandr.com/images/logo.png","name":"Everything Technical","@context":"https://schema.org"}</script>
+{"description":"Step by step process to use neural network to recognize MINST handwritten numbers","url":"https://blog.uplandr.com/pytorch/jupyter/2021/06/14/pytorch-cnn-mnist.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/pytorch/jupyter/2021/06/14/pytorch-cnn-mnist.html"},"headline":"Neural Network to recognize MNIST dataset using PyTorch","dateModified":"2021-06-14T00:00:00-05:00","datePublished":"2021-06-14T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.uplandr.com/feed.xml" title="Everything Technical" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -91,127 +92,79 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><!-- This site is built with [fastpages](https://github.com/fastai/fastpages), An easy to use blogging platform with extra features for Jupyter Notebooks.
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-![](/images/diagram.png "https://github.com/fastai/fastpages")
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Neural Network to recognize MNIST dataset using PyTorch</h1><p class="page-description">Step by step process to use neural network to recognize MINST handwritten numbers</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-06-14T00:00:00-05:00" itemprop="datePublished">
+        Jun 14, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
 
-[fastpages](https://github.com/fastai/fastpages) automates the process of creating blog posts via GitHub Actions, so you don't have to fuss with conversion scripts.  A full list of features can be found on [GitHub](https://github.com/fastai/fastpages).  
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#pytorch">pytorch</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
 
-You can edit the `index.html` file to change this content.
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/kaushikdasroy/my_fastpages/tree/master/_notebooks/2021-06-14-pytorch-cnn-mnist.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/kaushikdasroy/my_fastpages/master?filepath=_notebooks%2F2021-06-14-pytorch-cnn-mnist.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/kaushikdasroy/my_fastpages/blob/master/_notebooks/2021-06-14-pytorch-cnn-mnist.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-06-14-pytorch-cnn-mnist.ipynb
 -->
-<h1 id="posts">Posts</h1>
+
+<div class="container" id="notebook-container">
+        
+</div>
 
 
 
-  
-
-  <!-- Hide posts if front matter flag hide:true -->
-  
-  
-
-  <!-- Sort posts by rank, then date -->
-  
-  
-  
-
- 
-  
-
-   <!-- Assemble final sorted posts array -->
-  
-  <ul class="post-list"><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/fastpages/jupyter/2021/06/12/altair_5.html">
-            Altair
-          </a>
-        </h3>
-        <p class="post-meta-description">Altair test ride</p>
-          <p class="post-meta">Jun 12, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/fastpages/jupyter/2021/06/12/altair_4.html">
-            Altair
-          </a>
-        </h3>
-        <p class="post-meta-description">Altair test ride</p>
-          <p class="post-meta">Jun 12, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/fastpages/jupyter/2021/06/12/altair_3.html">
-            Altair
-          </a>
-        </h3>
-        <p class="post-meta-description">Altair test ride</p>
-          <p class="post-meta">Jun 12, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/fastpages/jupyter/2021/06/08/altair_2.html">
-            Altair
-          </a>
-        </h3>
-        <p class="post-meta-description">Altair test ride</p>
-          <p class="post-meta">Jun 8, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/fastpages/jupyter/2021/06/08/altair_1.html">
-            Altair
-          </a>
-        </h3>
-        <p class="post-meta-description">Altair test ride</p>
-          <p class="post-meta">Jun 8, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/fastpages/jupyter/2021/06/08/altair.html">
-            Altair
-          </a>
-        </h3>
-        <p class="post-meta-description">Altair test ride</p>
-          <p class="post-meta">Jun 8, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/2021/06/14/udacity-rnn-time-series.html">
-            Simple RNN
-          </a>
-        </h3>
-        <p class="post-meta-description"></p>
-          <p class="post-meta">Jun 14, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/pytorch/jupyter/2021/06/14/pytorch-cnn-mnist.html">
-            Neural Network to recognize MNIST dataset using PyTorch
-          </a>
-        </h3>
-        <p class="post-meta-description">Step by step process to use neural network to recognize MINST handwritten numbers</p>
-          <p class="post-meta">Jun 14, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/2021/06/14/ML0101EN-Reg-Simple-Linear-Regression-Co2-py-v1.html">
-            Title
-          </a>
-        </h3>
-        <p class="post-meta-description"></p>
-          <p class="post-meta">Jun 14, 2021</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/2021/06/06/udacity-rnn-time-series-1.html">
-            Simple RNN
-          </a>
-        </h3>
-        <p class="post-meta-description"></p>
-          <p class="post-meta">Jun 6, 2021</p>
-      </div>
-  </div></li></ul>
-
-    </div>
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="kaushikdasroy/my_fastpages"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/pytorch/jupyter/2021/06/14/pytorch-cnn-mnist.html" hidden></a>
+</article>
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/"></data>
