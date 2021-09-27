@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Pacs Based Covid 19 Classification Ai Workflow | Everything Technical</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Pacs Based Covid 19 Classification Ai Workflow" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Covid-19 classification pipeline" />
+<meta property="og:description" content="Covid-19 classification pipeline" />
+<link rel="canonical" href="https://blog.uplandr.com/2021/09/27/PACS-Based-Covid-19-Classification-AI-Workflow.html" />
+<meta property="og:url" content="https://blog.uplandr.com/2021/09/27/PACS-Based-Covid-19-Classification-AI-Workflow.html" />
+<meta property="og:site_name" content="Everything Technical" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-27T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Covid-19 classification pipeline","url":"https://blog.uplandr.com/2021/09/27/PACS-Based-Covid-19-Classification-AI-Workflow.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/2021/09/27/PACS-Based-Covid-19-Classification-AI-Workflow.html"},"headline":"Pacs Based Covid 19 Classification Ai Workflow","dateModified":"2021-09-27T00:00:00-05:00","datePublished":"2021-09-27T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.uplandr.com/feed.xml" title="Everything Technical" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CMLEB78YCD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CMLEB78YCD');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Everything Technical</a>
+    <!--
+    <a class="site-title" href="https://www.uplandr.com">Uplandr</a>
+    --><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <!--<a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a>-->
+
+          <a class="site-title" href="https://www.uplandr.com">Uplandr</a>
+
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Pacs Based Covid 19 Classification Ai Workflow</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-09-27T00:00:00-05:00" itemprop="datePublished">
+        Sep 27, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><strong>Covid-19 classification pipeline</strong></p>
+
+<p><strong>This is not for diagnostic use and no clinical decision should be made using the contents shared in this post. The model used for Covid-19 classification is not FDA approved for clinical use.</strong></p>
+
+<p>The purpose of this post is purely educational for the understanding of how an end-end clinical workflow can be produced using various components.</p>
+
+<p>The full cycle shown here is as follows:</p>
+
+<p>PACS (Orthanc) initiates an covid-19 classification request to NVIDIA Clara which does the inference and sends back the results back to PACS. Additionally, 3DSlicer is integrated with PACS to extract results for visualization purposes.</p>
+
+<p>This flow is going to use following components:</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>3DSlicer for visualization (<a href="http://www.slicer.org"><span class="underline">www.slicer.org</span></a> )</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>Orthanc DICOM server ( <a href="https://www.orthanc-server.com/"><span class="underline">https://www.orthanc-server.com/</span></a> )</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>Nvidia Clara Deploy SDK (<a href="http://www.nvidia.com"><span class="underline">www.nvidia.com</span></a> )</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>Nvidia Clara classification model (<a href="http://www.ngc.nvidia.com"><span class="underline">www.ngc.nvidia.com</span></a> )</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>Nvidia Clara covid-19 classification (<a href="https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_covid19_pipeline"><span class="underline">https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_covid19_pipeline</span></a> )</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Nvidia clara covid-19 pipeline is using pre-built models to create segmentation and classification output. Go through the pipeline from the above link to have a detailed understanding of the flow.</p>
+
+<p>This post is going to extend the pipeline further to integrate it with an Orthanc PACS. Orthanc PACS is used as a DICOM server. An AI analysis can be triggered from the Orthanc PACS with a DICOM series and after the completion of the pipeline, inferences will be automatically fed back to Orthanc.</p>
+
+<p>A desktop based 3DSlicer tool is integrated with the Orthanc PACS to directly get the inferences from the Orthanc PACS to 3DSlicer for visualization.</p>
+
+<p>Orthanc PACS has Stone viewer which is utilized for reading the pipeline generated observation pdf files - covid_lung_ratio and covid probability.</p>
+
+<p>I am using an AWS g4dn.2xlarge instance with 8 vCPUs and 1 GPU. I am on the Ubuntu 18.04 server. Minimum 6 vCPUs are required to execute this pipeline.</p>
+
+<p>The DICOM series provided by the clara covid-19 classification pipeline is utilized for this post.</p>
+
+<p>3DSlicer visualization of the input series</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image18.png" alt="" /></p>
+
+<p>Output of the complete pipeline:</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image1.png" alt="" /></p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image20.png" alt="" /></p>
+
+<p>I could not open the DICOM SEG Modality file generated by clara-seg-writer operator (refer to <a href="https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_covid19_pipeline"><span class="underline">https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_covid19_pipeline</span></a> ) in 3Dslicer DICOM viewer. I got an error while opening the file (ITK exception info: error in unknown: Could not create IO object for reading file) I need to further investigate the reason.</p>
+
+<p>But the Clara render server (localhost:8080) could open the SEG Modality segmentations. Below two segmentations are created by the pipeline. One is for the lung and the other is for lung lesions.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image5.png" alt="" /></p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image25.png" alt="" /></p>
+
+<p>Let’s walkthrough the steps taken to create the outputs.</p>
+
+<p><strong>Step1: Create the Clara Deploy pipeline</strong></p>
+
+<p>Follow the setup process described in the following link</p>
+
+<p><a href="https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_covid19_pipeline/setup"><span class="underline">https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_covid19_pipeline/setup</span></a></p>
+
+<p>This will create a pipeline</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image7.png" alt="" /></p>
+
+<p><strong>Step2: Configure the Clara DICOM Adapter for PACS to Pipeline communication</strong></p>
+
+<p>These references are valuable when using Clara DICOM Adapter -</p>
+
+<p>For setting up the adapter</p>
+
+<p><a href="https://nvidia.github.io/clara-dicom-adapter/setup/setup.html"><span class="underline">https://nvidia.github.io/clara-dicom-adapter/setup/setup.html</span></a></p>
+
+<p>To create and delete AETitles for clara, sources and destinations use the APIs-</p>
+
+<p><a href="https://nvidia.github.io/clara-dicom-adapter/api/rest/config.html"><span class="underline">https://nvidia.github.io/clara-dicom-adapter/api/rest/config.html</span></a></p>
+
+<p>The adapter will do few things for us-</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>It will receive DICOM series from PACS (Orthanc)</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>It will call the Clara pipeline to initiate the inference process</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>It will send the inference results back to PACS (Orthanc)</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Clara Adapter will work as a DICOM device in this case. Everytime a DICOM device calls another device there are few important parameters exchanged for verification.</p>
+
+<ul>
+  <li>
+    <blockquote>
+      <p>A “ Calling AETTitle” - AETitle that initiates the call.</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>A “Called AETitle” - AETitle that receives the call.</p>
+    </blockquote>
+  </li>
+  <li>
+    <blockquote>
+      <p>IP and Port information</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>A good source of basic understanding in PACS and networking between devices is here - <a href="https://www.orthanc-server.com/resources/2015-02-09-emsy-tutorial/index.html"><span class="underline">https://www.orthanc-server.com/resources/2015-02-09-emsy-tutorial/index.html</span></a></p>
+
+<p><strong>2.1 Instal Orthanc open source PACS</strong></p>
+
+<p>Install Orthanc in a host machine. I am using the same host machine and using the Orthanc Docker container to install Orthanc. It is straightforward process and explained in - <a href="https://book.orthanc-server.com/users/docker.html"><span class="underline">https://book.orthanc-server.com/users/docker.html</span></a></p>
+
+<p>Few things to keep in mind-</p>
+
+<p>Run the container in detached mode. Make sure to create a persistent volume of the DICOM database and map it to the local host. Create with restart option as “unless-stopped” to start the docker container automatically after restart of host. Use the orthanc image with plugins. Below Docker run command should help:</p>
+
+<p>docker run -d \</p>
+
+<p>-p 4242:4242 -p 8042:8042 \</p>
+
+<p>--restart unless-stopped \</p>
+
+<p>-v /orthanc/orthanc.json:/etc/orthanc/orthanc.json:ro \</p>
+
+<p>-v /orthanc/orthanc-db/:/var/lib/orthanc/db/ \</p>
+
+<p>jodogne/orthanc-plugins</p>
+
+<p>I have created a folder /orthanc for storing the orthanc config and the database. These folders are mapped to the Docker container. Orthanc uses /etc/orthanc/orthan.json file as config source which is mapped to host /orthanc/orthanc.json. We will make necessary changes in Orthanc by making changes in the /orthanc/orthanc.json and recreating the docker container.</p>
+
+<p>Use port number 8042 to open the Orthanc PACS. Default id/pwd is orthanc/orthanc</p>
+
+<p>After logging in, upload a DICOM series using an Orthanc upload user interface. You can use the same series available with the clara model</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image3.png" alt="" /></p>
+
+<p>After you upload you will find a DICOM series available in the studies</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image17.png" alt="" /></p>
+
+<p>2.1 For PACS(Orthanc) to send DICOM series to Clara Adapter:</p>
+
+<p>2.1.1 Orthanc has AETitle as “ORTHANC”</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image19.png" alt="" /></p>
+
+<p>At the Clara Adapter side create a source for the Orthanc using the clara CLI command:</p>
+
+<p>clara dicom create src -a ORTHANC -i 10.244.0.1</p>
+
+<p>For me the Orthanc host ip is 10.244.0.1 and this will create a source name AETitle “ORTHANC” at clara adapter.</p>
+
+<p>You can check the source by calling clara adapter API</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image21.png" alt="" /></p>
+
+<p>There are 3 sources listed with one for AETitle ORTHANC.</p>
+
+<p><strong>2.1.2 Next, let’s create another AETitle which will trigger the Clara pipeline job.</strong></p>
+
+<p>For this run the Clara CLI command</p>
+
+<p>clara dicom create aetitle -a COVIDAET pipeline-covid=&lt;PIPELINE-ID&gt;</p>
+
+<p>Here replace the PIPELINE-ID with the pipeline-id created in step-1 above. This will create a AETitle, “COVIDAET”, which, when called, will trigger a pipeline job indicated by the pipeline-id.</p>
+
+<p>You can check this clara AETitle by calling API:</p>
+
+<p>curl –location –request GET ‘http://localhost:5000/api/config/claraaetitle/COVIDAET’</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image8.png" alt="" /></p>
+
+<p><strong>2.1.3 Install DCMTK</strong></p>
+
+<p>Install DCMTK to proxy the DICOM service class user (SCU) and service class provider (SCP) functionality</p>
+
+<p>Refer to this doc for understanding SCP and SCU -</p>
+
+<p><a href="https://www.orthanc-server.com/resources/2015-02-09-emsy-tutorial/index.html"><span class="underline">https://www.orthanc-server.com/resources/2015-02-09-emsy-tutorial/index.html</span></a></p>
+
+<p>Install DCMTK by executing -</p>
+
+<p>sudo apt-get install dcmtk</p>
+
+<p>If you like you can create a local Dicom source called “MYPACS” in the host machine and issue a storescu command from the folder where input dicom source is stored to trigger the COVIDAET AETitle and associated pipelinejob.</p>
+
+<p>The command you will use is -</p>
+
+<p>storescu -v +sd +r -xb -aet “MYPACS” -aec “COVIDAET” AA.BB.CC.DD 104 ./</p>
+
+<p>AA.BB.CC.DD is local host ip</p>
+
+<p>This should complete the pipeline job and create an output file in Clara console to download form.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image28.png" alt="" /></p>
+
+<p><strong>2.1.4 Update PACS server to include Clara AETitle (i.e “COVIDAET)</strong></p>
+
+<p>We need to include COVIDAET as known AETitle in Orthanc for the PACS to send a DICOM series to COVIDAET. We already created a source called “ORTHANC” in clara adapter and therefore clara adapter knows how to handle a request from PACS.</p>
+
+<p>We will add a DICOM Modality for in orthanc config file for COVIDAET</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image9.png" alt="" /></p>
+
+<p><strong>2.1.5. Run a Storescu to associate source AETitle “ORTHANC” with Clara AETitle “COVIDAET”</strong></p>
+
+<p>Run the following command</p>
+
+<p>storescu -v +sd +r -xb -aet “ORTHANC” -aec “COVIDAET” AA.BB.CC.DD 104 ./</p>
+
+<p>AA.BB.CC.DD is host ip address, 104 is port</p>
+
+<p><strong>2.1.6 Run an incomplete loop by sending DICOM series from Orthanc</strong></p>
+
+<p>At this time you will be able to trigger COVIDAET and its associated pipeline job from Orthanc PACS. Select the DICOM study you uploaded and then select send to DICOM modality followed by “orthanc”. This should start a job</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image33.png" alt="" /></p>
+
+<p>You can check the status in the Clara Console.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image24.png" alt="" /></p>
+
+<p>You may also see whether Orthanc has successfully passed the DICOM series to COVIDAET in Orthanc Jobs tab</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image31.png" alt="" /></p>
+
+<p>If there is something wrong with the process check the kubernetes pods to understand reasons for failures.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image4.png" alt="" /></p>
+
+<p>Specially clara-adapter-* and clara-clara-platformapiserver-* will come handy in the debug process</p>
+
+<p>After successful completion of the job in the console, you may download the output payload for offline analysis and read.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image27.png" alt="" /></p>
+
+<p>At this time, Clara render server (port 8080) will be updated with the segmentations as well.</p>
+
+<p><strong>Step 3: Configure Clara Adapter for sending inference back to PACS</strong></p>
+
+<p>If you want to send the results back to PACS instead (which is the most typical scenario), we will update the Clara adapter and PACS config to enable that communication.</p>
+
+<p>In the Clara pipeline, there are steps to register results with outside AETitles.</p>
+
+<p>Clara adapter has the default SCU AETitle as “ClaraSCU”. Orthanc PACS has AETitle “ORTHANC” and uses DICOM Port as 4242</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image19.png" alt="" /></p>
+
+<p><strong>3.1 Create a destination AETitle in Clara Adapter for Orthanc PACS</strong></p>
+
+<p>Use following command to create destination</p>
+
+<p>clara dicom create dest -n orthanc -a ORTHANC -i 10.244.0.1 -p 4242</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image26.png" alt="" /></p>
+
+<p>The `-n orthanc` is important as the same name will be used in the pipeline yaml file.</p>
+
+<p>Change the pipeline yaml to reflect the Orthanc PACS as destination by indicating (`orthanc`). There are multiple places in the pipeline where the result got registered.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image2.png" alt="" /></p>
+
+<p>Changing pipeline yaml will require creation of a new pipeline.</p>
+
+<p>Create a new pipeline</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image7.png" alt="" /></p>
+
+<p>Delete the existing aetitle called COVIDAET and create a new one with the same name (COVIDAET) using the pipeline id from above</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image23.png" alt="" /></p>
+
+<p>To delete clara adapter AETitles use the APIs available at <a href="https://nvidia.github.io/clara-dicom-adapter/api/rest/config.html"><span class="underline">https://nvidia.github.io/clara-dicom-adapter/api/rest/config.html</span></a></p>
+
+<p><strong>3.2 Add `ClaraSCU` in Orthanc PACS for Orthanc to accept results from Clara Adapter</strong></p>
+
+<p>Update Orthanc config file and restart orthanc</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image9.png" alt="" /></p>
+
+<p>To restart docker, stop and delete docker container and start a new container. The data should persist as we are mapping the DICOM database in the host machine.</p>
+
+<p>With this change `ClaraSCU`should appear in the DICOM modalities of Orthanc PACS</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image14.png" alt="" /></p>
+
+<p><strong>3.3 Start a job for starting a job from Orthanc PACS and getting the inference back in the PACS (Full cycle)</strong></p>
+
+<p>Dicom study loaded in Orthanc</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image15.png" alt="" /></p>
+
+<p>Send to DICOM modality - `orthanc`</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image14.png" alt="" /></p>
+
+<p>This should start a job on Orthanc</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image22.png" alt="" /></p>
+
+<p>Clara console will show the progress of the job</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image24.png" alt="" /></p>
+
+<p>`kubectl get pods` will show the working pods</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image4.png" alt="" /></p>
+
+<p>Job completed</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image10.png" alt="" /></p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image11.png" alt="" /></p>
+
+<p>Success! The job is complete as shown in the dicom adapter.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image30.png" alt="" /></p>
+
+<p>New studies sent back to PACS</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image29.png" alt="" /></p>
+
+<p>That completes the full cycle of sending DICOM series from PACS to getting the inference back in the PACS.</p>
+
+<p>The Stone web viewer plugin shows the reports</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image1.png" alt="" /></p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image20.png" alt="" /></p>
+
+<p>I could not get the segmentation to open in the stone viewer, but used the Clara render server (port 8080) to show the segmentation.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image5.png" alt="" /></p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image25.png" alt="" /></p>
+
+<p>At this point connections in PACS should look like this</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image12.png" alt="" /></p>
+
+<p><strong>Step 4: Connecting PACS with 3DSlicer for visualization</strong></p>
+
+<p>Install 3DSlicer in your visualization server, for me it is in my local machine.</p>
+
+<p>For this we need to add your local machine ip and port in Orthanc PACS config dicom modalities.</p>
+
+<p>And we need to initiate a network connection from 3dslicer with Orthanc ip and its dicom port (4242). It should import the study and the inferences in the local 3dslicer database.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image16.png" alt="" /><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image6.png" alt="" /><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image32.png" alt="" /><img src="https://blog.uplandr.com/assets/img/2021-09-27-PACS-Based-Covid-19-Classification-AI-Workflow/media/image13.png" alt="" /></p>
+
+<p>I could not get the inferred segmentation visible in 3dslicer. The DICOM SEG file could not load. But the output segmentation was visible in the Clara render server.</p>
+
+  </div><a class="u-url" href="/2021/09/27/PACS-Based-Covid-19-Classification-AI-Workflow.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <!--
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        -->
+      </div>
+      <div class="footer-col">
+        <p>Amazing technology</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
