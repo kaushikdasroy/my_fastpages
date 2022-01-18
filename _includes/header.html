@@ -7,7 +7,7 @@
     
     <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
     
-    <a class="site-title" href="https://www.uplandr.com">Uplandr</a>
+    <a class="site-title" href="https://www.uplandr.com">{{ escape | "Uplandr" }}</a>
     
 
     {%- if titles_size > 0 -%}
