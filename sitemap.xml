@@ -44,6 +44,9 @@
 <loc>https://blog.uplandr.com/about/</loc>
 </url>
 <url>
+<loc>https://blog.uplandr.com/example/</loc>
+</url>
+<url>
 <loc>https://blog.uplandr.com/</loc>
 </url>
 <url>
@@ -51,9 +54,5 @@
 </url>
 <url>
 <loc>https://blog.uplandr.com/categories/</loc>
-</url>
-<url>
-<loc>https://blog.uplandr.com/_pages/example.html</loc>
-<lastmod>2022-01-17T20:28:35-06:00</lastmod>
 </url>
 </urlset>
