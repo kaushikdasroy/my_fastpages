@@ -4,19 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Setup Nvidia Clara Deploy For Medical Image Inference | Everything Technical</title>
+<title>An Example Markdown Post | Everything Technical</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Setup Nvidia Clara Deploy For Medical Image Inference" />
+<meta property="og:title" content="An Example Markdown Post" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="In this post I will go through the process of setting up NVIDIA Clara Deploy on AWS" />
-<meta property="og:description" content="In this post I will go through the process of setting up NVIDIA Clara Deploy on AWS" />
-<link rel="canonical" href="https://blog.uplandr.com/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html" />
-<meta property="og:url" content="https://blog.uplandr.com/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html" />
+<meta name="description" content="Test" />
+<meta property="og:description" content="Test" />
+<link rel="canonical" href="https://blog.uplandr.com/nvidia/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html" />
+<meta property="og:url" content="https://blog.uplandr.com/nvidia/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html" />
 <meta property="og:site_name" content="Everything Technical" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-08-30T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"In this post I will go through the process of setting up NVIDIA Clara Deploy on AWS","url":"https://blog.uplandr.com/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html"},"headline":"Setup Nvidia Clara Deploy For Medical Image Inference","dateModified":"2021-08-30T00:00:00-05:00","datePublished":"2021-08-30T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"description":"Test","url":"https://blog.uplandr.com/nvidia/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/nvidia/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html"},"headline":"An Example Markdown Post","dateModified":"2021-08-30T00:00:00-05:00","datePublished":"2021-08-30T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.uplandr.com/feed.xml" title="Everything Technical" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -102,7 +102,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Setup Nvidia Clara Deploy For Medical Image Inference</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-08-30T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">An Example Markdown Post</h1><p class="page-description">Test</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-08-30T00:00:00-05:00" itemprop="datePublished">
         Aug 30, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -113,11 +113,19 @@ window.onload = wrap_img;
 </span></p>
 
     
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#nvidia">nvidia</a>
+        
+      
+      </p>
+    
 
     </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p><strong>In this post I will go through the process of setting up NVIDIA Clara Deploy on AWS</strong></p>
+    <ul class="section-nav">
+</ul><p><strong>In this post I will go through the process of setting up NVIDIA Clara Deploy on AWS</strong></p>
 
 <p>I am referring to Brad Genereaux’s blog post to create a NVIDIA Clara based system. I will also use the NVIDIA Clara official installation guide and various other posts to install and troubleshoot.</p>
 
@@ -131,7 +139,7 @@ window.onload = wrap_img;
 
 <p>Create an AWS instance with following configuration (taken from NVIDIA official guide):</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image1.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image1.png" alt=""></p>
 
 <p>Ref: <a href="https://docs.nvidia.com/clara/deploy/ClaraInstallation.html#installation-on-a-cloud-service-provider-csp"><span class="underline">https://docs.nvidia.com/clara/deploy/ClaraInstallation.html#installation-on-a-cloud-service-provider-csp</span></a></p>
 
@@ -141,11 +149,11 @@ window.onload = wrap_img;
 
 <p>After creating the spot instance, remote into the AWS server -</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image2.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image2.png" alt=""></p>
 
 <p>Check that you have a CUDA enabled GPU:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image27.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image27.png" alt=""></p>
 
 <table>
   <tbody>
@@ -158,39 +166,39 @@ window.onload = wrap_img;
 
 <p>Check for the CUDA supported version of linux:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image17.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image17.png" alt=""></p>
 
 <p>It is a 64-bit system!</p>
 
 <p>Verify that gcc is installed</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image8.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image8.png" alt=""></p>
 
 <p>Find out the kernel version of the system</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image39.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image39.png" alt=""></p>
 
 <p>Before installing CUDA, the kernel header and development package of the same kernel version need to be installed.</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image31.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image31.png" alt=""></p>
 
 <p>Install CUDA by going to this link and selecting right choices:</p>
 
 <p><a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux"><span class="underline">https://developer.nvidia.com/cuda-downloads?target_os=Linux</span></a></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image4.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image4.png" alt=""></p>
 
 <p>Reboot the system after you are done with the above steps</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image5.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image5.png" alt=""></p>
 
 <p><strong>Install Docker</strong></p>
 
 <p>Follow the steps outlined in <a href="https://docs.docker.com/engine/install/ubuntu/"><span class="underline">https://docs.docker.com/engine/install/ubuntu/</span></a></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image50.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image50.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image3.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image3.png" alt=""></p>
 
 <p>Add docker’s official GPG Key</p>
 
@@ -280,7 +288,7 @@ window.onload = wrap_img;
 
 <p>sudo docker run –rm –gpus all nvidia/cuda:11.0-base nvidia-smi</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image18.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image18.png" alt=""></p>
 
 <p><strong>Configuration of NGC access</strong></p>
 
@@ -296,13 +304,13 @@ window.onload = wrap_img;
 
 <p>./ngc config set</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image21.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image21.png" alt=""></p>
 
 <p>Config docker to use NGC token</p>
 
 <p>docker login nvcr.io</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image36.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image36.png" alt=""></p>
 
 <p>Now Ubuntu is loaded with Docker, NVIDIA docker, NVIDIA container toolkit</p>
 
@@ -312,55 +320,55 @@ window.onload = wrap_img;
 
 <p>Clara Deploy installation guide is available in nvidia official site - <a href="https://docs.nvidia.com/clara/deploy/ClaraInstallation.html"><span class="underline">https://docs.nvidia.com/clara/deploy/ClaraInstallation.html</span></a></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image33.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image33.png" alt=""></p>
 
 <p>Download the clara deploy SDK</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image54.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image54.png" alt=""></p>
 
 <p>Unzip the file</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image37.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image37.png" alt=""></p>
 
 <p>Now install the Clara deploy prerequisites. To do this run the bootstrap.sh. This will install kubernetes, helm etc. and their dependencies.</p>
 
 <p>Navigate to the /etc/clara/bootstrap directory and run bootstrap.sh</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image43.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image43.png" alt=""></p>
 
 <p>Bootstrap.sh had old reference to helm repo</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image14.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image14.png" alt=""></p>
 
 <p>Had to change to get.helm.sh</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image16.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image16.png" alt=""></p>
 
 <p>Note: Helm 2 is now unsupported</p>
 
 <p>Tiller pod installation issue: I faced problems successfully running tiller pod</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image7.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image7.png" alt=""></p>
 
 <p>Tiller image is being sourced from gcr.io</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image25.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image25.png" alt=""></p>
 
 <p>But the help images now moved to github container registry (ghcr.io)</p>
 
 <p>As per the below deployment manifest, the image will be sourced from gcr.io</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image19.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image19.png" alt=""></p>
 
 <p>To make the image available, pulled the image manually from ghcr.io and retagged the image name with gcr.io, Along with that changed the imagePullPolicy to Never (from IfNotPresent).</p>
 
 <p>After these steps rerun the bootstrap.sh and pre-requisite should install successfully.</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image49.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image49.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image32.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image32.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image42.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image42.png" alt=""></p>
 
 <p>Some helpful links to solve the image mismatch issue:</p>
 
@@ -378,19 +386,19 @@ window.onload = wrap_img;
 
 <p>Run wget -</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image26.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image26.png" alt=""></p>
 
 <p>Move to /usr/bin</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image13.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image13.png" alt=""></p>
 
 <p>Unzip and chmod</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image28.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image28.png" alt=""></p>
 
 <p>Verify the Clara CLI is working</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image6.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image6.png" alt=""></p>
 
 <p>Adding the NGC API key to Clara CLI:</p>
 
@@ -400,47 +408,47 @@ window.onload = wrap_img;
 
 <p>Check the nvcr.io is connected thru docker:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image38.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image38.png" alt=""></p>
 
 <p><strong>Pull the clara deploy platform</strong></p>
 
 <p>When started to pull clara platform, error</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image10.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image10.png" alt=""></p>
 
 <p>My helm is v2, whereas “pull” is recognized in v3. Helm needs to be upgraded. Upgrading helm to 3.6.3, changing the helm_version and helm_checksum and re-executing bootstrap.sh</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image40.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image40.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image55.png" alt="" /><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image52.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image55.png" alt=""><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image52.png" alt=""></p>
 
 <p>Pods are running and didn’t get recreated:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image51.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image51.png" alt=""></p>
 
 <p>Tiller pod got created using kubernetes helm container image 2.15.2</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image53.png" alt="" /><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image41.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image53.png" alt=""><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image41.png" alt=""></p>
 
 <p>There is a version mismatch between client side and server side helm. We will see if this is a problem as we progress.</p>
 
 <p>For now, the `clara pull platform` works:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image22.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image22.png" alt=""></p>
 
 <p>Clara service is up as shown by the `helm ls`. Let’s bring the other services up.</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image45.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image45.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image23.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image23.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image46.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image46.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image34.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image34.png" alt=""></p>
 
 <p>Let’s check the PODs</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image11.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image11.png" alt=""></p>
 
 <p>All running!</p>
 
@@ -448,51 +456,51 @@ window.onload = wrap_img;
 
 <p>Pull a chest xray pipeline</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image47.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image47.png" alt=""></p>
 
 <p>Keep the model in a common model directory:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image12.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image12.png" alt=""></p>
 
 <p>Create a pipeline for inference using the pipeline yaml file and clara create:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image44.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image44.png" alt=""></p>
 
 <p>It will give a pipeline ID.</p>
 
 <p>The pipeline is running:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image24.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image24.png" alt=""></p>
 
 <p>Feed a input pic in png format to the pipeline by creating a job using the pipeline_id from previous step:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image9.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image9.png" alt=""></p>
 
 <p>Start the job manually with the job_id from previous step:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image35.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image35.png" alt=""></p>
 
 <p>Create an output destination directory and Download the output files:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image15.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image15.png" alt=""></p>
 
 <p>Two file got created,</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image20.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image20.png" alt=""></p>
 
 <p>CSV file showing the chances of diseases:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image30.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image30.png" alt=""></p>
 
 <p>The second file shows the image:</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image48.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image48.png" alt=""></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image29.png" alt="" /></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-08-30-Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference/media/image29.png" alt=""></p>
 
 <p>We have used Clara deploy successfully to get an inference from an x-ray image!</p>
 
-  </div><a class="u-url" href="/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html" hidden></a>
+  </div><a class="u-url" href="/nvidia/2021/08/30/Setup-NVIDIA-Clara-Deploy-for-Medical-Image-Inference.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
