@@ -1,3 +1,12 @@
+---
+toc: true
+layout: post
+description: Fine-tuned model for inference
+categories: [markdown]
+title: Fine-tuned model for inference
+hide: false
+---
+
 # Inference using Fine-tuned AI Model and NVIDIA Triton Server
 
 Let's start clara back up again.
