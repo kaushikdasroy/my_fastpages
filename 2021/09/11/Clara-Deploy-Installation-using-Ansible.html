@@ -4,19 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>An Example Markdown Post | Everything Technical</title>
+<title>Clara Deploy Installation Using Ansible | Everything Technical</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="An Example Markdown Post" />
+<meta property="og:title" content="Clara Deploy Installation Using Ansible" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Test" />
-<meta property="og:description" content="Test" />
-<link rel="canonical" href="https://blog.uplandr.com/nvidia/2021/09/15/Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy.html" />
-<meta property="og:url" content="https://blog.uplandr.com/nvidia/2021/09/15/Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy.html" />
+<meta name="description" content="Clara Deploy installation using Ansible in an Ubuntu 18.04" />
+<meta property="og:description" content="Clara Deploy installation using Ansible in an Ubuntu 18.04" />
+<link rel="canonical" href="https://blog.uplandr.com/2021/09/11/Clara-Deploy-Installation-using-Ansible.html" />
+<meta property="og:url" content="https://blog.uplandr.com/2021/09/11/Clara-Deploy-Installation-using-Ansible.html" />
 <meta property="og:site_name" content="Everything Technical" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-09-15T00:00:00-05:00" />
+<meta property="article:published_time" content="2021-09-11T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"Test","url":"https://blog.uplandr.com/nvidia/2021/09/15/Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/nvidia/2021/09/15/Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy.html"},"headline":"An Example Markdown Post","dateModified":"2021-09-15T00:00:00-05:00","datePublished":"2021-09-15T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"description":"Clara Deploy installation using Ansible in an Ubuntu 18.04","url":"https://blog.uplandr.com/2021/09/11/Clara-Deploy-Installation-using-Ansible.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/2021/09/11/Clara-Deploy-Installation-using-Ansible.html"},"headline":"Clara Deploy Installation Using Ansible","dateModified":"2021-09-11T00:00:00-05:00","datePublished":"2021-09-11T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.uplandr.com/feed.xml" title="Everything Technical" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -102,8 +102,8 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">An Example Markdown Post</h1><p class="page-description">Test</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-09-15T00:00:00-05:00" itemprop="datePublished">
-        Sep 15, 2021
+    <h1 class="post-title p-name" itemprop="name headline">Clara Deploy Installation Using Ansible</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-09-11T00:00:00-05:00" itemprop="datePublished">
+        Sep 11, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
     
@@ -113,67 +113,91 @@ window.onload = wrap_img;
 </span></p>
 
     
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
-      
-        <a class="category-tags-link" href="/categories/#nvidia">nvidia</a>
-        
-      
-      </p>
-    
 
     </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <ul class="section-nav">
-</ul><p><strong>Brain Tumor Segmentation with Clara Deploy Pipeline</strong></p>
+    <p><strong>Clara Deploy installation using Ansible in an Ubuntu 18.04</strong></p>
 
-<p>We will use the installed Clara deploy SDK (refer to previous posts to install Clara Deploy in AWS) to run a brain tumor segmentation pipeline. We will use the clara ngc segmentation model for this purpose (ref - <a href="https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_brain_tumor_pipeline"><span class="underline">https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ai_brain_tumor_pipeline</span></a>)</p>
+<p>Here we are going to set up Clara Deploy in Ubuntu 18.04. This setup can be used for creating clara pipeline for various use cases. The ubuntu server will host the Ansible as well, we are not remoting into the server.</p>
 
-<p>Create a pipeline folder and pull the pipeline from ngc</p>
+<p>For this I will be using following resource from NVIDIA</p>
 
-<p>clara pull pipeline clara_ai_brain_tumor_pipeline</p>
+<p><a href="https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ansible"><span class="underline">https://ngc.nvidia.com/catalog/resources/nvidia:clara:clara_ansible</span></a></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image3.png" alt=""></p>
+<p>And following resource from ansible</p>
 
-<p>Unzip the input dicom series</p>
+<p><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"><span class="underline">https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html</span></a></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image9.png" alt=""></p>
+<p>Create a g4dn ubuntu 18.04 instance in AWS</p>
 
-<p>Unzip the model</p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image1.png" alt="" /></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image4.png" alt=""></p>
+<p>My system has python3 installed</p>
 
-<p>Register the model</p>
+<p>Get the clara deploy ansible installation download from</p>
 
-<p>clara create model -p segmentation_mri_brain_tumors_br16_t1c2tc_v1/ -t tensorflow</p>
+<p>wget –content-disposition https://api.ngc.nvidia.com/v2/resources/nvidia/clara/clara_ansible/versions/0.8.1-2108.1/zip -O clara_ansible_0.8.1-2108.1.zip</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image2.png" alt=""></p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image8.png" alt="" /></p>
 
-<p>Create the pipeline</p>
+<p>Unzip the files to get the ansible `playbook` folder. Install unzip with `sudo install unzip` if required.</p>
 
-<p>clara create pipeline -p brain-tumor-pipeline-model-repo.yaml</p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image4.png" alt="" /></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image1.png" alt=""></p>
+<p>My system doesn’t have Ansible installed. We can install ansible using `pip`. We can follow this process outlines in <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"><span class="underline">https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html</span></a></p>
 
-<p>Create and start the job</p>
+<p>to install Ansible with pip.</p>
 
-<p>clara create jobs -n brain-test -p b8703c88407848a48a58496ef411daee -f ~/.clara/pipelines/clara_ai_brain_tumor_pipeline/dcm</p>
+<p>My system doesn’t have a `pip` either. Let’s start by installing pip.</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image6.png" alt=""></p>
+<p>$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</p>
 
-<p>Check the Clara Console in localhost:32002 and take the output download of the job.</p>
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image2.png" alt="" /></p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image7.png" alt=""></p>
+<p>You may have to install python disutils to install additional python utilities like pip. You can do that my sudo apt-get install python3-distutils</p>
 
-<p>View the output in 3d-slicer-segmented tumor</p>
+<p>Also install python-apt with</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image5.png" alt=""></p>
+<p>sudo apt-get install python3-apt</p>
 
-<p>Location of the tumor through rendering</p>
+<p>Then we can install pip</p>
 
-<p><img src="https://blog.uplandr.com/assets/img/2021-09-15-Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy-/media/image8.png" alt=""></p>
+<p>python3 get-pip.py –user</p>
 
-  </div><a class="u-url" href="/nvidia/2021/09/15/Brain-Tumor-Segmentation-Model-Implementation-in-Clara-Deploy.html" hidden></a>
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image10.png" alt="" /></p>
+
+<p>Go ahead installing ansible</p>
+
+<p>python3 -m pip install –user ansible</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image6.png" alt="" /></p>
+
+<p>Make sure to add ansible in $PATH</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image5.png" alt="" /></p>
+
+<p>Start installing NVIDIA drive from playbook</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image7.png" alt="" /></p>
+
+<p>I changed the hostname to localhost as I am using the local machine for clara deploy</p>
+
+<p>Do a reboot with</p>
+
+<p>Sudo reboot now</p>
+
+<p>Start installing clara with</p>
+
+<p>Ansible-playbook -K clara.yml</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image9.png" alt="" /></p>
+
+<p>Clara is installed. Check the version to ensure.</p>
+
+<p><img src="https://blog.uplandr.com/assets/img/2021-09-11-Clara-Deploy-Installation-using-Ansible/media/image3.png" alt="" /></p>
+
+  </div><a class="u-url" href="/2021/09/11/Clara-Deploy-Installation-using-Ansible.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
