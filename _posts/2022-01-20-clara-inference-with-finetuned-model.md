@@ -1,3 +1,13 @@
+---
+toc: true
+layout: post
+description: Inference using a Fine-tuned model.
+categories: [Nvidia Clara for Healthcare]
+title: Nvidia Clara based inference using a Fine-tuned model
+hide: false
+---
+
+
 # Inference using Fine-tuned AI Model and NVIDIA Triton Server
 
 Let's start clara back up again.
