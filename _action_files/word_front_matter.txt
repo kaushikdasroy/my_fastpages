@@ -1,3 +1,4 @@
 ---
 layout: post
+categories: [Nvidia Clara for Healthcare]
 ---
