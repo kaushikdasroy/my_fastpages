@@ -16,6 +16,6 @@ MONAI Deploy SDK requires Python 3.7 or up. Install or update Python. Ensure pip
 pip install monai-deploy-app-sdk
 ```
 
-![](images/some_folder/your_image.png)
+![](/images/some_folder/your_image.png)
 
 ## Install MONAI SDK
