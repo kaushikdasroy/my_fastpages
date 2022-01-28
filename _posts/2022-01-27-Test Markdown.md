@@ -4,7 +4,7 @@ layout: post
 description: Inference using a Fine-tuned model.
 categories: [MONAI for Healthcare]
 title: Setup MONAI Deploy for medical imaging on a AWS Ubuntu
-hide: false
+hide: true
 comments: true
 ---
 
