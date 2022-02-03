@@ -129,6 +129,7 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h2"><a href="#setup-environment">Setup Environment</a></li>
 <li class="toc-entry toc-h2"><a href="#clone-the-git-repo-with-code-and-test-files">Clone the git repo with code and test files</a></li>
+<li class="toc-entry toc-h2"><a href="#build-the-application">Build the Application</a></li>
 <li class="toc-entry toc-h2"><a href="#run-the-docker-image-with-an-input-image-locally">Run the docker image with an input image locally</a></li>
 </ul>
 </li>
@@ -162,6 +163,9 @@ python -c "import monai.deploy" || pip install -q "monai-deploy-app-sdk"
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Project-MONAI/monai-deploy-app-sdk.git
 </code></pre></div></div>
+
+<h2 id="build-the-application">
+<a class="anchor" href="#build-the-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build the Application</h2>
 
 <p>Execute the application code from the cloned repository with path for test input image and location of output. The application code serially strings three operators in a single class. Three operators are - Sobel Operator, Median Operator and Gaussian Operator.</p>
 
