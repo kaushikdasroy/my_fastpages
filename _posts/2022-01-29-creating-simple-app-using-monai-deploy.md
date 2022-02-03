@@ -36,13 +36,13 @@ Clone the MONAI SDK Deploy [repository](https://github.com/Project-MONAI/monai-d
 git clone https://github.com/Project-MONAI/monai-deploy-app-sdk.git
 ```
 
-Execute the application code from the cloned repository with path for test input image and location of output. The application code serially strings three operators in a single calss. Three operators are - Sobel Operator, Median Operator and Gaussian Operator. 
+Execute the application code from the cloned repository with path for test input image and location of output. The application code serially strings three operators in a single class. Three operators are - Sobel Operator, Median Operator and Gaussian Operator. 
 
 ```
 python examples/apps/simple_imaging_app/app.py -i examples/apps/simple_imaging_app/brain_mr_input.jpg -o output
 ```
 
-> Note: the above command is same as `monai-deply exec` command
+> Note: the above command is same as `monai-deploy exec` command
 
 ![](/images/2022-01-29-creating-simple-app-using-monai-deploy/image1.png)
 
@@ -56,7 +56,7 @@ monai-deploy package examples/apps/simple_imaging_app -t simple_app:latest
 
 ## Run the docker image with an input image locally
 
-We will use the same input image which we used for test, which is not ideal.
+We will use the same input image which we used for test, which is not ideal, but using it for the purpose of demonstration.
 
 ```
 mkdir -p input && rm -rf input/*
