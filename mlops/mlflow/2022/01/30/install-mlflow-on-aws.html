@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Install MLFlow Tracking on AWS | DS/ML Technical</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Install MLFlow Tracking on AWS" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Install MLFlow Tracking on AWS" />
+<meta property="og:description" content="Install MLFlow Tracking on AWS" />
+<link rel="canonical" href="https://blog.uplandr.com/mlops/mlflow/2022/01/30/install-mlflow-on-aws.html" />
+<meta property="og:url" content="https://blog.uplandr.com/mlops/mlflow/2022/01/30/install-mlflow-on-aws.html" />
+<meta property="og:site_name" content="DS/ML Technical" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-30T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Install MLFlow Tracking on AWS","url":"https://blog.uplandr.com/mlops/mlflow/2022/01/30/install-mlflow-on-aws.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/mlops/mlflow/2022/01/30/install-mlflow-on-aws.html"},"headline":"Install MLFlow Tracking on AWS","dateModified":"2022-01-30T00:00:00-06:00","datePublished":"2022-01-30T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.uplandr.com/feed.xml" title="DS/ML Technical" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CMLEB78YCD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CMLEB78YCD');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">DS/ML Technical</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Topics</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Install MLFlow Tracking on AWS</h1><p class="page-description">Install MLFlow Tracking on AWS</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-01-30T00:00:00-06:00" itemprop="datePublished">
+        Jan 30, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#MLOps">MLOps</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#MLFlow">MLFlow</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#mlflow-tracking">MLFlow Tracking</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#run-and-artifact-recording">Run and Artifact recording</a></li>
+<li class="toc-entry toc-h2"><a href="#mlflow-tracking-server">MLFlow Tracking Server</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#launch-ec2-environment-postgresql-and-s3-bucket">Launch EC2 environment, Postgresql and S3 Bucket</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#setup-tracking-server-ec2">Setup Tracking server (EC2)</a></li>
+<li class="toc-entry toc-h2"><a href="#setup-a-rds-prostgresql-db-for-entity-store">Setup a RDS Prostgresql db for entity store.</a></li>
+<li class="toc-entry toc-h2"><a href="#setup-a-s3-bucket-for-artifact-storage">Setup a S3 bucket for artifact storage.</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#execute-installation">Execute Installation</a></li>
+<li class="toc-entry toc-h1"><a href="#connect-with-the-mlfow-ui">Connect with the MLFow UI</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul><p>There are many MLOps tools ranging from all-in-one to fit for a purpose. Lets take a look at MLFlow which falls in the category of all in one tool having modules supports - Tracking, Projects, Model and Registry. It is an open-source tool. MLFlow supports many machine learning frameworks, such as Tensorflow, PyTorch, XGBoos, H20.ai, Scikit-learn etc.</p>
+
+<p>MLFlow can be used in local machine, and cloud environments. First we will install MLFlow on a AWS environment. This is an experimental setup not a product onw.</p>
+
+<p>In this post I will setup MLFlow Tracking. I will write other posts for other modules of MLFlow.</p>
+
+<h1 id="mlflow-tracking">
+<a class="anchor" href="#mlflow-tracking" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLFlow Tracking</h1>
+
+<p>Quoting from MLFlow.org 
+“The MLflow Tracking component is an API and UI for logging parameters, code versions, metrics, and output files when running your machine learning code and for later visualizing the results. MLflow Tracking lets you log and query experiments using Python, REST, R API, and Java API APIs.”</p>
+
+<p>MLFlow tracking is organized around <code class="language-plaintext highlighter-rouge">runs</code>. Each <code class="language-plaintext highlighter-rouge">run</code>execute a piece of data science code and records some information like - code version, time, source, parameters, Metrics, Artifacts.</p>
+
+<p><code class="language-plaintext highlighter-rouge">runs</code> can be recorded using MLFlow Python, R, Java, REST APIs from anywhere the code is run. These can be recorded from a notebook, cloud or standalone programs</p>
+
+<p><code class="language-plaintext highlighter-rouge">runs</code> can be recorded from a MLFlow Project and MLFlow remembers the project URI.</p>
+
+<p><code class="language-plaintext highlighter-rouge">runs</code> can be organiged in MLFlow experiments.</p>
+
+<p><code class="language-plaintext highlighter-rouge">runs</code> are recorded in the local machine in a folder called <code class="language-plaintext highlighter-rouge">mlruns</code>. <code class="language-plaintext highlighter-rouge">mlflow ui</code> brings the log in the tracking server for display.</p>
+
+<h2 id="run-and-artifact-recording">
+<a class="anchor" href="#run-and-artifact-recording" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run and Artifact recording</h2>
+
+<p>We will using mlflow with remote tracking server, backend and artifact stores.</p>
+
+<p>In our example we will be using a remote server as tracking server, a Postgresql db as MLFlow entity store and a S3 bucket as our MLFlow artifact store.</p>
+
+<p>Even though it is not demonstrated here, we can record runs by calling mlflow functions, python API in any code we run. The functions are detailed in the <a href="https://mlflow.org/docs/latest/tracking.html#logging-data-to-runs">mlflow</a> official documentation. Autologging is also supported for most of the frameworks.</p>
+
+<p>All the tracking ui functions can be called programmatically, which makes it easy to log runs and see results in tracking UI. 
+<code class="language-plaintext highlighter-rouge">mlflow.set_tracking_uri()</code> connects to a tracking URI. There are many parameters can be passed to this function to establish authentication etc. <code class="language-plaintext highlighter-rouge">MLFLOW_TRACKING_URI</code> environment variable can be used to set the tracking URI.</p>
+
+<h2 id="mlflow-tracking-server">
+<a class="anchor" href="#mlflow-tracking-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLFlow Tracking Server</h2>
+
+<p><code class="language-plaintext highlighter-rouge">mlflow server</code> command starts a tracking server. Backend storage and artifact storage details are provided with the command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mlflow server \
+    --backend-store-uri /mnt/persistent-disk \
+    --default-artifact-root s3://my-mlflow-bucket/ \
+    --host 0.0.0.0
+</code></pre></div></div>
+
+<p>Both a file based or a database based storage are supported as backend storage. SQLAlchemy database URI is used as database storage indicator. <code class="language-plaintext highlighter-rouge">&lt;dialect&gt;+&lt;driver&gt;://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;database&gt;</code> MLflow support mysql, mssql, sqlite and postgresql as database dilect. I am going to use a Postgresql in this post.</p>
+
+<blockquote>
+  <p>To run model registry functionality Database based backend storage is required.</p>
+</blockquote>
+
+<p>Default artifact storage is provided while creating the server and it can be overwritten during an experiment run if a new artifact location is provided. Artificate location can be a NFS file systems or a S3 compatible storage. I will be using Amazon S3.</p>
+
+<p>MLFlow access the S3 access details from the IAM role, a profile in ~/.aws/credentials, or the environment variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY depending on which of these are available</p>
+
+<h1 id="launch-ec2-environment-postgresql-and-s3-bucket">
+<a class="anchor" href="#launch-ec2-environment-postgresql-and-s3-bucket" aria-hidden="true"><span class="octicon octicon-link"></span></a>Launch EC2 environment, Postgresql and S3 Bucket</h1>
+
+<h2 id="setup-tracking-server-ec2">
+<a class="anchor" href="#setup-tracking-server-ec2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup Tracking server (EC2)</h2>
+<p>I am using python 3.7 on a AWS Amazon Linux 2 AMI, t2.micro instance. This will work as tracking server. Ensure port 5000 is open to take HTTP request. Setup EC2 instance security to enable HTTP traffic in 5000 PORT.</p>
+
+<h2 id="setup-a-rds-prostgresql-db-for-entity-store">
+<a class="anchor" href="#setup-a-rds-prostgresql-db-for-entity-store" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup a RDS Prostgresql db for entity store.</h2>
+<p>I am creating the db in the same vpc as the EC2 instance and my instance has access to the db. My db security groups are default vpc security groups and these are sufficient to get access to db. If you choose a db outside ec2 vpc, you would require vpc peering and change in db instance’s route table.</p>
+
+<h2 id="setup-a-s3-bucket-for-artifact-storage">
+<a class="anchor" href="#setup-a-s3-bucket-for-artifact-storage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup a S3 bucket for artifact storage.</h2>
+<p>Create a s3 bucket. There are few steps required to make sure ec2 has access to the s3 bucket.
+Create IAM role with minimum required access to S3. 
+Attach the IAM role to ec2 instance. 
+Verify that ec2 has access to s3 bucket by running <code class="language-plaintext highlighter-rouge">aws cli s3 ls</code> command in ec2 instance. It should show your bucket name.</p>
+
+<h1 id="execute-installation">
+<a class="anchor" href="#execute-installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Execute Installation</h1>
+
+<p>Run following commands:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update packages
+sudo yum update
+
+# install python
+sudo yum install python3.7
+
+# install MLFlow and AWS python sdk
+sudo pip3 install mlflow[extras] psycopg2-binary boto3
+
+# start the mlflow serve. 
+# "nohup is a POSIX command which means "no hang up". It ignores the HUP signal, does not stop when the user logs out.
+nohup mlflow server --backend-store-uri postgresql://&lt;USERID&gt;:&lt;PASSWORD&gt;@&lt;DB-ENDPOINT&gt;:5432 --default-artifact-root s3://&lt;S3-BUCKET-NAME&gt; --host 0.0.0.0 &amp;
+</code></pre></div></div>
+
+<p>It will start the MLFlow server</p>
+
+<h1 id="connect-with-the-mlfow-ui">
+<a class="anchor" href="#connect-with-the-mlfow-ui" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect with the MLFow UI</h1>
+
+<p>Start the MLFlow ui by accessing the ec2 endpoint port 5000 <code class="language-plaintext highlighter-rouge">http://&lt;ec2-endpoint&gt;:5000</code></p>
+
+<p><img src="/images/2022-01-30-install-mlflow-on-aws/image1.png" alt=""></p>
+
+<h2 id="reference">
+<a class="anchor" href="#reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reference</h2>
+
+<p>Refer to <a href="https://mlflow.org/docs/">MLFlow official documentation</a> to make the installation production grade by adding more security and learn about how to use the tracking server to track your ML Experiments from different environments.</p>
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="kaushikdasroy/my_fastpages"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/mlops/mlflow/2022/01/30/install-mlflow-on-aws.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <!--
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        -->
+      </div>
+      <div class="footer-col">
+        <p>Amazing technology</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
