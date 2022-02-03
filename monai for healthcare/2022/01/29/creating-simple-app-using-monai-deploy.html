@@ -163,13 +163,13 @@ python -c "import monai.deploy" || pip install -q "monai-deploy-app-sdk"
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Project-MONAI/monai-deploy-app-sdk.git
 </code></pre></div></div>
 
-<p>Execute the application code from the cloned repository with path for test input image and location of output. The application code serially strings three operators in a single calss. Three operators are - Sobel Operator, Median Operator and Gaussian Operator.</p>
+<p>Execute the application code from the cloned repository with path for test input image and location of output. The application code serially strings three operators in a single class. Three operators are - Sobel Operator, Median Operator and Gaussian Operator.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python examples/apps/simple_imaging_app/app.py -i examples/apps/simple_imaging_app/brain_mr_input.jpg -o output
 </code></pre></div></div>
 
 <blockquote>
-  <p>Note: the above command is same as <code class="language-plaintext highlighter-rouge">monai-deply exec</code> command</p>
+  <p>Note: the above command is same as <code class="language-plaintext highlighter-rouge">monai-deploy exec</code> command</p>
 </blockquote>
 
 <p><img src="/images/2022-01-29-creating-simple-app-using-monai-deploy/image1.png" alt=""></p>
@@ -184,7 +184,7 @@ python -c "import monai.deploy" || pip install -q "monai-deploy-app-sdk"
 <h2 id="run-the-docker-image-with-an-input-image-locally">
 <a class="anchor" href="#run-the-docker-image-with-an-input-image-locally" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run the docker image with an input image locally</h2>
 
-<p>We will use the same input image which we used for test, which is not ideal.</p>
+<p>We will use the same input image which we used for test, which is not ideal, but using it for the purpose of demonstration.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p input &amp;&amp; rm -rf input/*
 cp examples/apps/simple_imaging_app/brain_mr_input.jpg input/
