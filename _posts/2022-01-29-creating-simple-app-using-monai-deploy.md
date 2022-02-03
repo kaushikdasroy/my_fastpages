@@ -36,6 +36,8 @@ Clone the MONAI SDK Deploy [repository](https://github.com/Project-MONAI/monai-d
 git clone https://github.com/Project-MONAI/monai-deploy-app-sdk.git
 ```
 
+## Build the Application
+
 Execute the application code from the cloned repository with path for test input image and location of output. The application code serially strings three operators in a single class. Three operators are - Sobel Operator, Median Operator and Gaussian Operator. 
 
 ```
