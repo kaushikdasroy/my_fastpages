@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Steps to build a Spleen segmentation app and deploy in MONAI Inference Service (MIS). MIS is a inference service which can be called over HTTP to execute a MONAI Application Package (MAP)
-categories: [MLOps, MLFlow]
+categories: [MONAI for Healthcare]
 title: Building and Deploying A Spleen Segmentation app using MONAI App Packager(MAP) and MONAI Inference Service (MIS)
 hide: false
 comments: true
