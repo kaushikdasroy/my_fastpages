@@ -1,14 +1,14 @@
 ---
 toc: true
 layout: post
-description: Steps to build a Spleen segmentation app and deploy in MONAI Inference Service (MIS). MIS is a inference service which can be called over HTTP to execute a MONAI Application Package (MAP)
+description: Steps to build a Spleen segmentation app and deploy in MONAI Inference Service (MIS). MIS is an inference service which can be called over HTTP to execute a MONAI Application Package (MAP)
 categories: [MONAI for Healthcare]
 title: Building and Deploying A Spleen Segmentation app using MONAI App Packager(MAP) and MONAI Inference Service (MIS)
 hide: false
 comments: true
 ---
 
-In this post, I will build and deploy a spleen segmentation AI model provider by MONAI, in a AWS environment. The inference service can invoked over HTTP with paylod and the service will produce segmention file for visualization. 
+In this post, I will build and deploy a spleen segmentation AI model provider by MONAI, in an AWS environment. The inference service can invoked over HTTP with paylod and the service will produce segmention file for visualization. 
 
 
 We will download spleen segmentation model and data from source in MONAI App Deploy SDK [examples](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html), build the model in an MONAI application package(MAP), and will deploy the MAP using MONAI Inference Service (MIS) for consumption over HTTP. The doumentation is available [here](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html).
