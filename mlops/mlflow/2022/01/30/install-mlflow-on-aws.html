@@ -199,6 +199,8 @@ window.onload = wrap_img;
 <h1 id="launch-ec2-environment-postgresql-and-s3-bucket">
 <a class="anchor" href="#launch-ec2-environment-postgresql-and-s3-bucket" aria-hidden="true"><span class="octicon octicon-link"></span></a>Launch EC2 environment, Postgresql and S3 Bucket</h1>
 
+<p>I am setting up MLFlow infrastructure with <a href="https://mlflow.org/docs/latest/tracking.html#scenario-4-mlflow-with-remote-tracking-server-backend-and-artifact-stores">remote Tracking Server, backend and artifact stores</a></p>
+
 <h2 id="setup-tracking-server-ec2">
 <a class="anchor" href="#setup-tracking-server-ec2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup Tracking server (EC2)</h2>
 <p>I am using python 3.7 on a AWS Amazon Linux 2 AMI, t2.micro instance. This will work as tracking server. Ensure port 5000 is open to take HTTP request. Setup EC2 instance security to enable HTTP traffic in 5000 PORT.</p>
