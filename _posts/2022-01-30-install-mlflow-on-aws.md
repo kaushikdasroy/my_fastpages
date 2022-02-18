@@ -56,6 +56,8 @@ MLFlow picks up the S3 access details from IAM role, a profile in ~/.aws/credent
 
 # Launch EC2 environment, Postgresql and S3 Bucket
 
+I am setting up MLFlow infrastructure with [remote Tracking Server, backend and artifact stores](https://mlflow.org/docs/latest/tracking.html#scenario-4-mlflow-with-remote-tracking-server-backend-and-artifact-stores)
+
 ## Setup Tracking server (EC2)
 I am using python 3.7 on a AWS Amazon Linux 2 AMI, t2.micro instance. This will work as tracking server. Ensure port 5000 is open to take HTTP request. Setup EC2 instance security to enable HTTP traffic in 5000 PORT.
 
