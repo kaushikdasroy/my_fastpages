@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Train, Deploy and Track a Keras Image Classifier with MLflow | DS/ML Technical</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Train, Deploy and Track a Keras Image Classifier with MLflow" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Train and Deploy Keras Image Classifier with MLflow" />
+<meta property="og:description" content="Train and Deploy Keras Image Classifier with MLflow" />
+<link rel="canonical" href="https://blog.uplandr.com/mlops/mlflow/2022/02/22/train-and-deploy-keras-image-classifier-with-mlflow.html" />
+<meta property="og:url" content="https://blog.uplandr.com/mlops/mlflow/2022/02/22/train-and-deploy-keras-image-classifier-with-mlflow.html" />
+<meta property="og:site_name" content="DS/ML Technical" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-22T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Train and Deploy Keras Image Classifier with MLflow","url":"https://blog.uplandr.com/mlops/mlflow/2022/02/22/train-and-deploy-keras-image-classifier-with-mlflow.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/mlops/mlflow/2022/02/22/train-and-deploy-keras-image-classifier-with-mlflow.html"},"headline":"Train, Deploy and Track a Keras Image Classifier with MLflow","dateModified":"2022-02-22T00:00:00-06:00","datePublished":"2022-02-22T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.uplandr.com/feed.xml" title="DS/ML Technical" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CMLEB78YCD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CMLEB78YCD');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">DS/ML Technical</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Topics</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Train, Deploy and Track a Keras Image Classifier with MLflow</h1><p class="page-description">Train and Deploy Keras Image Classifier with MLflow</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-22T00:00:00-06:00" itemprop="datePublished">
+        Feb 22, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#MLOps">MLOps</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#MLFlow">MLFlow</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#objective">Objective</a></li>
+<li class="toc-entry toc-h1"><a href="#start-mlflow-tracking-server">Start MLFlow Tracking Server</a></li>
+<li class="toc-entry toc-h1"><a href="#train-a-flower-classifier-model">Train a Flower Classifier model</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#about-mlflow-project">About MLflow Project</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#run-training">Run Training</a></li>
+<li class="toc-entry toc-h1"><a href="#mlflow-tracking">MLflow Tracking</a></li>
+<li class="toc-entry toc-h1"><a href="#mlflow-artifact-repository">MLflow Artifact Repository</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#mlflow-model">MLflow Model</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#deploy-the-model">Deploy the Model</a></li>
+<li class="toc-entry toc-h1"><a href="#test-deployed-model">Test deployed Model</a></li>
+<li class="toc-entry toc-h1"><a href="#possible-errors">Possible Errors</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#attributeerror-str-object-has-no-attribute-decode">AttributeError: &#39;str&#39; object has no attribute &#39;decode&#39;</a></li>
+<li class="toc-entry toc-h2"><a href="#modulenotfounderror-no-module-named-boto3">ModuleNotFoundError: No module named &#39;boto3&#39;</a></li>
+</ul>
+</li>
+</ul><h1 id="objective">
+<a class="anchor" href="#objective" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objective</h1>
+
+<p>Objective of this post:</p>
+<ul>
+  <li>Execute a training and deployment cycle using MLFlow as tool</li>
+  <li>Discuss pre-requisities for using MLFlow to train and deploy model</li>
+  <li>See the experiment results in MLFlow Tracking and artifacts in AWS S3</li>
+  <li>List down possible major errors while following along this post</li>
+</ul>
+
+<p>This post is not intended to explain ML Engineering for flower classification using keras.</p>
+
+<p>Use MLFlow official <a href="https://github.com/mlflow/mlflow/tree/master/examples/flower_classifier">github</a> as reference along with this article.</p>
+
+<p>I am using an AWS g4dn.xlarge instance for this demonstration.</p>
+
+<h1 id="start-mlflow-tracking-server">
+<a class="anchor" href="#start-mlflow-tracking-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start MLFlow Tracking Server</h1>
+
+<p>Conda virtual environment is used in this demonstartion to execute training and deployment. Follow <a href="https://www.uplandr.com/post/how-to-use-conda-for-creating-virtual-environments-and-package-management">this</a> link if you need help in creation and management of conda environment.</p>
+
+<p>Create a new conda environment and follow the instructions provided <a href="https://blog.uplandr.com/mlops/mlflow/2022/01/30/install-mlflow-on-aws.html">here</a> to start MLFlow Tracking server with Postgresql as entity store and S3 as Artifact store.</p>
+
+<p>After completing above steps, MLFlow tracking will be available in http://ip-address:5000
+Go ahead and access the url to make sure tracking server is up and running.</p>
+
+<h1 id="train-a-flower-classifier-model">
+<a class="anchor" href="#train-a-flower-classifier-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Train a Flower Classifier model</h1>
+
+<p>Clone the official <a href="https://github.com/mlflow/mlflow">MLFLow repo</a>. The repo includes many examples for trying out various features of MLFlow. For our demo purpose, I am going to use Flower Classifier example. The example is placed in <code class="language-plaintext highlighter-rouge">example\flower_classifier</code>directory in the repo. The directory is organized as a <code class="language-plaintext highlighter-rouge">MLflow Project</code>. In this example, a VGG16 deep learning model is trained to classify flower species from photos using a dataset available from <a href="www.tensorflow.org">tensorflow.org</a>. Keras is used to train the model.</p>
+
+<h2 id="about-mlflow-project">
+<a class="anchor" href="#about-mlflow-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>About MLflow Project</h2>
+
+<p>MLflow project is a convention to organize code for users and tools to understand and process machine learning code. An elaborate description of MLflow Project is given in the MLflow official <a href="https://mlflow.org/docs/latest/projects.html#project-directories">docs</a>.</p>
+
+<p>Any git repo or folder can work as MLflow Project and any python or bash script can work as entry point of the project. MLflow projects include python based API and Command-line tools for running projects. In this demo, command-line tool is utilized to execute project.</p>
+
+<p>MLflow project entrypoint can be further controlled by including a <code class="language-plaintext highlighter-rouge">MLproject</code> file in the MLflow Project directory.</p>
+
+<p>MLflow project can run in Conda, Docker or System environment. In this demonstartion conda environment is used for execution. The conda environment is specified in <code class="language-plaintext highlighter-rouge">conda.yaml</code> file within the project directory. The project entry point and parameters are specified in the <code class="language-plaintext highlighter-rouge">MLproject</code> file.</p>
+
+<h1 id="run-training">
+<a class="anchor" href="#run-training" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run Training</h1>
+
+<blockquote>
+  <p>Note: make sure to update <code class="language-plaintext highlighter-rouge">MLFLOW_TRACKING_URI</code> environment variable with the MLFlow Tracking server information e.g.  http://ip-address:5000</p>
+</blockquote>
+
+<p>Execute training from command-line:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mlflow run examples/flower_classifier
+</code></pre></div></div>
+
+<p>This creates a conda virtual environment for training our model.</p>
+
+<p><img src="/images/2022-02-22-train-and-deploy-model-with-mlflow/image1.png" alt=""></p>
+
+<p>After successful completion of training, mlflow generates a run id.</p>
+
+<p><img src="/images/2022-02-22-train-and-deploy-model-with-mlflow/image2.png" alt=""></p>
+
+<h1 id="mlflow-tracking">
+<a class="anchor" href="#mlflow-tracking" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLflow Tracking</h1>
+
+<p>Open the tracking URI at http://ip-address:5000 and check the training parameters logged.</p>
+
+<p><img src="/images/2022-02-22-train-and-deploy-model-with-mlflow/image3.png" alt=""></p>
+
+<h1 id="mlflow-artifact-repository">
+<a class="anchor" href="#mlflow-artifact-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLflow Artifact Repository</h1>
+
+<p>MLflow model created by the training is stored in AWS S3.</p>
+
+<p><img src="/images/2022-02-22-train-and-deploy-model-with-mlflow/image7.png" alt=""></p>
+
+<h2 id="mlflow-model">
+<a class="anchor" href="#mlflow-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLflow Model</h2>
+
+<p>MLflow model is a format of packaging ML Models that can be used by various tools for serving, for example, by an API or by a batch inference system. The format defines a convention to save models in different flavors to support different downstream tools.</p>
+
+<p>MLflow model is a directory with some relevant files in the directory . The <code class="language-plaintext highlighter-rouge">MLmodel</code> file in the root directory defines the different flavors the model can be viewed in. Refer to official MLflow <a href="https://mlflow.org/docs/latest/models.html#built-in-model-flavors">doc</a> for details on MLflow Model.</p>
+
+<p>An example of <code class="language-plaintext highlighter-rouge">MLmodel</code> file where model is available as python function</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>artifact_path: model
+flavors:
+  python_function:
+    code: code
+    data: data/image_model
+    env: conda.yaml
+    loader_module: image_pyfunc
+    python_version: 3.7.12
+model_uuid: ef9a1e89fbcd44a69cebd9888f684561
+run_id: 6b31e177900245afa37c2c181a47b53c
+utc_time_created: '2022-02-22 01:21:14.789377'
+
+</code></pre></div></div>
+
+<h1 id="deploy-the-model">
+<a class="anchor" href="#deploy-the-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploy the Model</h1>
+
+<p>Deploy the model from the tracking server REST endpoint by executing <code class="language-plaintext highlighter-rouge">mlflow models serve</code>. The <code class="language-plaintext highlighter-rouge">run id</code> created during the training is used to refer the model to serve.</p>
+
+<p>This also creates a separate conda virtual environment for deployment purpose.</p>
+
+<p><img src="/images/2022-02-22-train-and-deploy-model-with-mlflow/image4.png" alt=""></p>
+
+<h1 id="test-deployed-model">
+<a class="anchor" href="#test-deployed-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Test deployed Model</h1>
+
+<p>Go to directory where <code class="language-plaintext highlighter-rouge">score_images_rest.py</code> is placed and run the script with test image as an argument</p>
+
+<p><img src="/images/2022-02-22-train-and-deploy-model-with-mlflow/image5.png" alt=""></p>
+
+<p><img src="/images/2022-02-22-train-and-deploy-model-with-mlflow/image6.png" alt=""></p>
+
+<p>The model runs on the passed flower image and predicts which flower it is!</p>
+
+<h1 id="possible-errors">
+<a class="anchor" href="#possible-errors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Possible Errors</h1>
+
+<p>Following errors may appear while completing the training and deployment</p>
+
+<h2 id="attributeerror-str-object-has-no-attribute-decode">
+<a class="anchor" href="#attributeerror-str-object-has-no-attribute-decode" aria-hidden="true"><span class="octicon octicon-link"></span></a><code class="language-plaintext highlighter-rouge">AttributeError: 'str' object has no attribute 'decode'</code>
+</h2>
+
+<p>While model serving, this error occurs if version of installed h5py package version &gt; 3. 
+Downgrade the version of h5py to 2.10.0 by running <code class="language-plaintext highlighter-rouge">pip install h5py==2.10.0</code> in the conda virtual environment for deployment and that should solve this problem.</p>
+
+<h2 id="modulenotfounderror-no-module-named-boto3">
+<a class="anchor" href="#modulenotfounderror-no-module-named-boto3" aria-hidden="true"><span class="octicon octicon-link"></span></a><code class="language-plaintext highlighter-rouge">ModuleNotFoundError: No module named 'boto3'</code>
+</h2>
+
+<p>This error occurs during <code class="language-plaintext highlighter-rouge">mlflow run</code> if the virtual environment does not contain boto3. Install boto3 package and retry.</p>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="kaushikdasroy/my_fastpages"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/mlops/mlflow/2022/02/22/train-and-deploy-keras-image-classifier-with-mlflow.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <!--
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        -->
+      </div>
+      <div class="footer-col">
+        <p>Amazing technology</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
