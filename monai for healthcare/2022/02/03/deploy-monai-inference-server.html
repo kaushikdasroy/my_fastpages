@@ -138,11 +138,11 @@ window.onload = wrap_img;
 </li>
 <li class="toc-entry toc-h1"><a href="#7-deploy-mis-with-map-using-the-helm-charts">7. Deploy MIS with MAP using the Helm Charts</a></li>
 <li class="toc-entry toc-h1"><a href="#8-test-the-service">8. Test the service</a></li>
-</ul><p>In this post, I will build and deploy a spleen segmentation AI model provider by MONAI, in an AWS environment. The inference service can invoked over HTTP with paylod and the service will produce segmention file for visualization.</p>
+</ul><p>In this post, I will build and deploy a spleen segmentation AI model, provided by MONAI, in an AWS environment. The inference service can be invoked over HTTP with a payload and thereafter the service will produce a segmention file for visualization.</p>
 
-<p>We will download spleen segmentation model and data from source in MONAI App Deploy SDK <a href="https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html">examples</a>, build the model in an MONAI application package(MAP), and will deploy the MAP using MONAI Inference Service (MIS) for consumption over HTTP. The doumentation is available <a href="https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html">here</a>.</p>
+<p>We will download spleen segmentation model and data from source in MONAI App Deploy SDK <a href="https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html">examples</a>, build the model in an MONAI application package(MAP), and will deploy the MAP using MONAI Inference Service (MIS) for consumption over HTTP. The official MONAI doumentation is available <a href="https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html">here</a>.</p>
 
-<p>The process can be used to deploy any model in torch script using MIS.</p>
+<p>The process can be used to deploy any model available in torch script format.</p>
 
 <h1 id="1-download-segmentation-model-and-test-data">
 <a class="anchor" href="#1-download-segmentation-model-and-test-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Download Segmentation Model and Test Data</h1>
@@ -159,8 +159,8 @@ unzip -o "ai_spleen_seg_data_updated_1203.zip"
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p my_app
 </code></pre></div></div>
 
-<p>Move python files from MONAI App Deploy SDK <a href="https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html">examples</a> to <code class="language-plaintext highlighter-rouge">my_app</code> directory - <code class="language-plaintext highlighter-rouge">__init__.py</code>,  <code class="language-plaintext highlighter-rouge">__main__.py</code>,  <code class="language-plaintext highlighter-rouge">app.py</code>,  <code class="language-plaintext highlighter-rouge">spleen_seg_operator.py</code>
-These files are model specific inference operator classes packaged into application class. Application directory required to have specific <code class="language-plaintext highlighter-rouge">.py</code> files for MONAI packager to work.</p>
+<p>Move following python files from MONAI App Deploy SDK <a href="https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html">examples</a> to <code class="language-plaintext highlighter-rouge">my_app</code> directory - <code class="language-plaintext highlighter-rouge">__init__.py</code>,  <code class="language-plaintext highlighter-rouge">__main__.py</code>,  <code class="language-plaintext highlighter-rouge">app.py</code>,  <code class="language-plaintext highlighter-rouge">spleen_seg_operator.py</code>
+These files are model specific inference operator classes packaged into application class. Application directory is required to have specific <code class="language-plaintext highlighter-rouge">.py</code> files for MONAI packager to work.</p>
 
 <p><img src="/images/2022-02-03-deploy-monai-inference-server/image-1.png" alt=""></p>
 
