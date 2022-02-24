@@ -8,12 +8,12 @@ hide: false
 comments: true
 ---
 
-In this post, I will build and deploy a spleen segmentation AI model provider by MONAI, in an AWS environment. The inference service can invoked over HTTP with paylod and the service will produce segmention file for visualization. 
+In this post, I will build and deploy a spleen segmentation AI model, provided by MONAI, in an AWS environment. The inference service can be invoked over HTTP with a payload and thereafter the service will produce a segmention file for visualization. 
 
 
-We will download spleen segmentation model and data from source in MONAI App Deploy SDK [examples](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html), build the model in an MONAI application package(MAP), and will deploy the MAP using MONAI Inference Service (MIS) for consumption over HTTP. The doumentation is available [here](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html).
+We will download spleen segmentation model and data from source in MONAI App Deploy SDK [examples](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html), build the model in an MONAI application package(MAP), and will deploy the MAP using MONAI Inference Service (MIS) for consumption over HTTP. The official MONAI doumentation is available [here](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html).
 
-The process can be used to deploy any model in torch script using MIS.
+The process can be used to deploy any model available in torch script format.
 
 # 1. Download Segmentation Model and Test Data
 
@@ -32,8 +32,8 @@ Create a `my_app` folder for the application folder structure.
 mkdir -p my_app
 ```
 
-Move python files from MONAI App Deploy SDK [examples](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html) to `my_app` directory - `__init__.py`,  `__main__.py`,  `app.py`,  `spleen_seg_operator.py`
-These files are model specific inference operator classes packaged into application class. Application directory required to have specific `.py` files for MONAI packager to work. 
+Move following python files from MONAI App Deploy SDK [examples](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html) to `my_app` directory - `__init__.py`,  `__main__.py`,  `app.py`,  `spleen_seg_operator.py`
+These files are model specific inference operator classes packaged into application class. Application directory is required to have specific `.py` files for MONAI packager to work. 
 
 ![](/images/2022-02-03-deploy-monai-inference-server/image-1.png)
 
