@@ -111,16 +111,26 @@ docker run -it -v "$(pwd)/export/":"/var/run/monai/export/config/" my_app:latest
 Open the values.yaml and update as following 
 
 `images.monaiInferenceService` with MONAI Inference Service image name (monai/inference-service)
+
 `images.monaiInferenceServiceTag`with MONAI Inference Service image tag (0.1)
+
 `payloadService.hostVolumePath`with path to local directory which will serve as a shared volume between MIS and its PODs
+
 `map.urn` with `map-image:tag`
+
 `map.entrypoint` with data from command in `app.json` 
+
 `map.cpu` with data from `pkg.json`
+
 `map.memory` with data from `pkg.json`
+
 `map.gpu` with data from `pkg.json`
+
 `map.inputPath` with appending the `input.path` with the working-directory in `app.json`
+
 `map.outputPath` with appending the `output.path` with the working-directory in `app.json`
-`map.modelPath` with Model value path within MAP container. Can be obtained from `pkg.json` file. Only take the path till folder which hold the models ("/opt/monai/models")
+
+`map.modelPath` with Model value path within MAP container. This can be obtained from `pkg.json` file. Only take the path till folder which hold the models ("/opt/monai/models")
 
 # 7. Deploy MIS with MAP using the Helm Charts
 
