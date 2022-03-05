@@ -238,17 +238,27 @@ docker run -it -v "$(pwd)/export/":"/var/run/monai/export/config/" my_app:latest
 
 <p>Open the values.yaml and update as following</p>
 
-<p><code class="language-plaintext highlighter-rouge">images.monaiInferenceService</code> with MONAI Inference Service image name (monai/inference-service)
-<code class="language-plaintext highlighter-rouge">images.monaiInferenceServiceTag</code>with MONAI Inference Service image tag (0.1)
-<code class="language-plaintext highlighter-rouge">payloadService.hostVolumePath</code>with path to local directory which will serve as a shared volume between MIS and its PODs
-<code class="language-plaintext highlighter-rouge">map.urn</code> with <code class="language-plaintext highlighter-rouge">map-image:tag</code>
-<code class="language-plaintext highlighter-rouge">map.entrypoint</code> with data from command in <code class="language-plaintext highlighter-rouge">app.json</code> 
-<code class="language-plaintext highlighter-rouge">map.cpu</code> with data from <code class="language-plaintext highlighter-rouge">pkg.json</code>
-<code class="language-plaintext highlighter-rouge">map.memory</code> with data from <code class="language-plaintext highlighter-rouge">pkg.json</code>
-<code class="language-plaintext highlighter-rouge">map.gpu</code> with data from <code class="language-plaintext highlighter-rouge">pkg.json</code>
-<code class="language-plaintext highlighter-rouge">map.inputPath</code> with appending the <code class="language-plaintext highlighter-rouge">input.path</code> with the working-directory in <code class="language-plaintext highlighter-rouge">app.json</code>
-<code class="language-plaintext highlighter-rouge">map.outputPath</code> with appending the <code class="language-plaintext highlighter-rouge">output.path</code> with the working-directory in <code class="language-plaintext highlighter-rouge">app.json</code>
-<code class="language-plaintext highlighter-rouge">map.modelPath</code> with Model value path within MAP container. Can be obtained from <code class="language-plaintext highlighter-rouge">pkg.json</code> file. Only take the path till folder which hold the models (“/opt/monai/models”)</p>
+<p><code class="language-plaintext highlighter-rouge">images.monaiInferenceService</code> with MONAI Inference Service image name (monai/inference-service)</p>
+
+<p><code class="language-plaintext highlighter-rouge">images.monaiInferenceServiceTag</code>with MONAI Inference Service image tag (0.1)</p>
+
+<p><code class="language-plaintext highlighter-rouge">payloadService.hostVolumePath</code>with path to local directory which will serve as a shared volume between MIS and its PODs</p>
+
+<p><code class="language-plaintext highlighter-rouge">map.urn</code> with <code class="language-plaintext highlighter-rouge">map-image:tag</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">map.entrypoint</code> with data from command in <code class="language-plaintext highlighter-rouge">app.json</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">map.cpu</code> with data from <code class="language-plaintext highlighter-rouge">pkg.json</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">map.memory</code> with data from <code class="language-plaintext highlighter-rouge">pkg.json</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">map.gpu</code> with data from <code class="language-plaintext highlighter-rouge">pkg.json</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">map.inputPath</code> with appending the <code class="language-plaintext highlighter-rouge">input.path</code> with the working-directory in <code class="language-plaintext highlighter-rouge">app.json</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">map.outputPath</code> with appending the <code class="language-plaintext highlighter-rouge">output.path</code> with the working-directory in <code class="language-plaintext highlighter-rouge">app.json</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">map.modelPath</code> with Model value path within MAP container. This can be obtained from <code class="language-plaintext highlighter-rouge">pkg.json</code> file. Only take the path till folder which hold the models (“/opt/monai/models”)</p>
 
 <h1 id="7-deploy-mis-with-map-using-the-helm-charts">
 <a class="anchor" href="#7-deploy-mis-with-map-using-the-helm-charts" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Deploy MIS with MAP using the Helm Charts</h1>
