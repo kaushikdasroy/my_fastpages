@@ -1,7 +1,7 @@
 ---
 toc: true
 layout: post
-description: Train a Spleen segmentation model using a pretrained Spleen segmentation model from NVIDIA GPU Cloud. Pretrained model in Medical model archive (MMAR) format. We will create a new model in PyTorch model format (.pth). Then we will convert the .pth model to Torchscript (.ts) format using Tracing. Torchscript model is an intermediate representation of a PyTorch model that can then be run in a high-performance environment such as C++.   
+description: Train a Spleen segmentation model using a pretrained segmentation model from NVIDIA GPU Cloud. The pretrained model is in Medical model archive (MMAR) format. We will create a new model in PyTorch model format (.pth) and then will convert the model to Torchscript (.ts) format using Tracing. Torchscript model is an intermediate representation of a PyTorch model that can then be run in a high-performance environment such as C++.   
 categories: [MONAI for Healthcare]
 title: Transfer Learning from a Clara Train Model using MONAI 
 hide: false
