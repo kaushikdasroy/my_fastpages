@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Steps to build a Spleen segmentation app and deploy in MONAI Inference Service (MIS). MIS is an inference service which can be called over HTTP to execute a MONAI Application Package (MAP)
-categories: [MONAI for Healthcare]
+categories: [MONAI for Healthcare, AWS]
 title: Building and Deploying A Spleen Segmentation app using MONAI App Packager(MAP) and MONAI Inference Service (MIS)
 hide: false
 comments: true
@@ -14,6 +14,13 @@ In this post, I will build and deploy a spleen segmentation AI model, provided b
 We will download spleen segmentation model and data from source in MONAI App Deploy SDK [examples](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html), build the model in an MONAI application package(MAP), and will deploy the MAP using MONAI Inference Service (MIS) for consumption over HTTP. The official MONAI doumentation is available [here](https://docs.monai.io/projects/monai-deploy-app-sdk/en/latest/notebooks/tutorials/03_segmentation_app.html).
 
 The process can be used to deploy any model available in torch script format.
+
+# Setup Environment
+
+For this demo, we will need a kubernetes environment with helm 3. I am using an Ubuntu 18.04 AWS environment with g4dn instance. I have used a bootstrap bash script provided by NVIDIA to install docker, docker compose, kuberenetes and helm. I have made modifications in the script to install newer version of helm (v3). The modified script is available [here](https://github.com/kaushikdasroy/monai-ai-spleen-seg-deploy-app).
+
+The demo also needs `monai-app-deploy-sdk` installed in the environment. I have used a conda environment with python 3.7 as base.  
+
 
 # 1. Download Segmentation Model and Test Data
 
