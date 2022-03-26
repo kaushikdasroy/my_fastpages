@@ -173,7 +173,7 @@ window.onload = wrap_img;
 <p>Even though it is not demonstrated here, we can record runs by calling mlflow functions, python API in any code we run. The functions are detailed in the <a href="https://mlflow.org/docs/latest/tracking.html#logging-data-to-runs">mlflow</a> official documentation. Autologging is also supported for most of the frameworks.</p>
 
 <p>All the tracking ui functions can be called programmatically, which makes it easy to log runs and see results in tracking UI. 
-<code class="language-plaintext highlighter-rouge">mlflow.set_tracking_uri()</code> connects to a tracking URI. Many parameters can be passed to this function to perform tasks such as establish authentication etc. <code class="language-plaintext highlighter-rouge">MLFLOW_TRACKING_URI</code> environment variable can be used to set the tracking URI.</p>
+<code class="language-plaintext highlighter-rouge">mlflow.set_tracking_uri()</code> connects to a tracking URI. Many parameters can be passed to this function to perform tasks such as establish authentication etc. <code class="language-plaintext highlighter-rouge">MLFLOW_TRACKING_URI</code> environment variable, in format http://10.0.0.1:5000, can be used to set the tracking URI.</p>
 
 <h2 id="mlflow-tracking-server">
 <a class="anchor" href="#mlflow-tracking-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>MLFlow Tracking Server</h2>
