@@ -32,7 +32,7 @@ In our example we will be using a remote server as tracking server, a Postgresql
 Even though it is not demonstrated here, we can record runs by calling mlflow functions, python API in any code we run. The functions are detailed in the [mlflow](https://mlflow.org/docs/latest/tracking.html#logging-data-to-runs) official documentation. Autologging is also supported for most of the frameworks.
 
 All the tracking ui functions can be called programmatically, which makes it easy to log runs and see results in tracking UI. 
-`mlflow.set_tracking_uri()` connects to a tracking URI. Many parameters can be passed to this function to perform tasks such as establish authentication etc. `MLFLOW_TRACKING_URI` environment variable can be used to set the tracking URI.
+`mlflow.set_tracking_uri()` connects to a tracking URI. Many parameters can be passed to this function to perform tasks such as establish authentication etc. `MLFLOW_TRACKING_URI` environment variable, in format http://10.0.0.1:5000, can be used to set the tracking URI.
 
 
 ## MLFlow Tracking Server
