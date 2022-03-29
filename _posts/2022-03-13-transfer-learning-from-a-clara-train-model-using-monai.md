@@ -55,4 +55,4 @@ The loss and the segementation performance metrics Dice is shown in a plot.
 
 # Deploy the Torchscript Model as REST service using MIS
 
-Steps to deploy the torchscript model (.ts) using MONAI Inference Service (MIS) is described in this [post](https://blog.uplandr.com/monai%20for%20healthcare/2022/02/03/deploy-monai-inference-server.html). 
+Steps to deploy the torchscript model (.ts) using MONAI Inference Service (MIS) is described in this [post](https://blog.uplandr.com/monai%20for%20healthcare/aws/2022/02/03/deploy-monai-inference-server.html). 
