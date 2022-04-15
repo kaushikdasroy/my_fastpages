@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>End to end ML pipeline using multiple open source tools. Create a pipeline for model training and an application to use the AI model for generating prediction. | DS/ML Technical</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="End to end ML pipeline using multiple open source tools. Create a pipeline for model training and an application to use the AI model for generating prediction." />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="End to end ML pipeline using multiple open source tools and AWS" />
+<meta property="og:description" content="End to end ML pipeline using multiple open source tools and AWS" />
+<link rel="canonical" href="https://blog.uplandr.com/mlops/mlflow/dvc/evidentlyai/cookiecutter/github%20actions/heroku/2022/03/24/End-to-end-ml-pipeline.html" />
+<meta property="og:url" content="https://blog.uplandr.com/mlops/mlflow/dvc/evidentlyai/cookiecutter/github%20actions/heroku/2022/03/24/End-to-end-ml-pipeline.html" />
+<meta property="og:site_name" content="DS/ML Technical" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-24T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"End to end ML pipeline using multiple open source tools and AWS","url":"https://blog.uplandr.com/mlops/mlflow/dvc/evidentlyai/cookiecutter/github%20actions/heroku/2022/03/24/End-to-end-ml-pipeline.html","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.uplandr.com/mlops/mlflow/dvc/evidentlyai/cookiecutter/github%20actions/heroku/2022/03/24/End-to-end-ml-pipeline.html"},"headline":"End to end ML pipeline using multiple open source tools. Create a pipeline for model training and an application to use the AI model for generating prediction.","dateModified":"2022-03-24T00:00:00-05:00","datePublished":"2022-03-24T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://blog.uplandr.com/feed.xml" title="DS/ML Technical" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CMLEB78YCD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CMLEB78YCD');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">DS/ML Technical</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Topics</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">End to end ML pipeline using multiple open source tools. Create a pipeline for model training and an application to use the AI model for generating prediction.</h1><p class="page-description">End to end ML pipeline using multiple open source tools and AWS</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-03-24T00:00:00-05:00" itemprop="datePublished">
+        Mar 24, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      14 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#MLOps">MLOps</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#MLFlow">MLFlow</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#DVC">DVC</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#EvidentlyAI">EvidentlyAI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Cookiecutter">Cookiecutter</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Github Actions">Github Actions</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Heroku">Heroku</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#create-a-virtual-environment">Create a virtual environment</a></li>
+<li class="toc-entry toc-h1"><a href="#create-data-science-project-structure">Create Data Science project structure</a></li>
+<li class="toc-entry toc-h1"><a href="#create-a-github-repository">Create a github repository</a></li>
+<li class="toc-entry toc-h1"><a href="#download-data">Download Data</a></li>
+<li class="toc-entry toc-h1"><a href="#dvc-for-data-version-control">DVC for data version control</a></li>
+<li class="toc-entry toc-h1"><a href="#source-code">Source code</a></li>
+<li class="toc-entry toc-h1"><a href="#create-training-pipeline">Create training pipeline</a></li>
+<li class="toc-entry toc-h1"><a href="#run-pipeline">Run pipeline</a></li>
+<li class="toc-entry toc-h1"><a href="#web-app-with-flask">Web app with Flask</a></li>
+<li class="toc-entry toc-h1"><a href="#unit-test-using-pytest">Unit test using Pytest</a></li>
+<li class="toc-entry toc-h1"><a href="#create-an-app-in-heroku">Create an app in Heroku</a></li>
+<li class="toc-entry toc-h1"><a href="#create-ci-cd-pipeline-using-github-actions">Create CI-CD pipeline using Github Actions</a></li>
+<li class="toc-entry toc-h1"><a href="#create-a-procfile-for-heroku-to-start-the-process">Create a “Procfile” for Heroku to start the process</a></li>
+<li class="toc-entry toc-h1"><a href="#push-code-to-github">Push code to Github</a></li>
+<li class="toc-entry toc-h1"><a href="#check-the-app-in-heroku-provided-domain">Check the App in Heroku provided Domain</a></li>
+<li class="toc-entry toc-h1"><a href="#run-some-tests-with-numeric-and-non-numeric-data">Run some tests with Numeric and Non-numeric data</a></li>
+<li class="toc-entry toc-h1"><a href="#model-monitoring-with-evidentlyai">Model monitoring with EvidentlyAI</a></li>
+</ul><p>We are going to create a ML Pipeline using various tools. I am recreating this <a href="https://medium.com/@shanakachathuranga/end-to-end-machine-learning-pipeline-with-mlops-tools-mlflow-dvc-flask-heroku-evidentlyai-github-c38b5233778c">reference</a></p>
+
+<p>MLOps, which is also called Machine Learning DevOps, is a collection of a few different pipelines. There are three major ingredients of a ML pipeline - Data, Model and Application. The pipelines automate various interactions between data, model and applications to make the entire ML pipeline work.</p>
+
+<ul>
+  <li>The first pipeline is the data pipeline. Data pipeline takes data from source and prepares the data for ML Engineering use.</li>
+  <li>The second pipeline trains a starter model with the ingested data to create a refined model.</li>
+  <li>The third pipeline deploys the refined model in a web or batch environment for making inferences.</li>
+</ul>
+
+<p>Applications are written to prepare data, train models and deploy models.</p>
+
+<p>In this demo, there are few major parts. 
+The first one is a DVC based pipeline to train a model. DVC is an open source Data version control tool based on git. It is a handy tool where actions are based on change in data or application. It allows tracking change in a file/directory.</p>
+
+<p>The second part is a github action CICD pipeline. This to automate push application changes to the cloud, in this case Heroku.</p>
+
+<p>In the third part, EvidentlyAI is used to analyze drifts of various kinds such as data and target drift. It is possible to trigger an automated retraining based on a predetermined drift threshold, but it is not covered in this post.</p>
+
+<p>The github repo for this demo is <a href="https://github.com/kaushikdasroy/mlops_pipeline">here</a>.</p>
+
+<h1 id="create-a-virtual-environment">
+<a class="anchor" href="#create-a-virtual-environment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a virtual environment</h1>
+
+<p>Create a virtual environment using Conda and activate the virtual environment. To install Conda in your system follow this <a href="https://www.uplandr.com/post/how-to-use-conda-for-creating-virtual-environments-and-package-management">link</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create -n mlops_pipeline python=3.7 -y
+conda activate mlops_pipeline
+</code></pre></div></div>
+
+<h1 id="create-data-science-project-structure">
+<a class="anchor" href="#create-data-science-project-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create Data Science project structure</h1>
+
+<p>I will use the cookiecutter data science project structure to organize my project.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install cookiecutter
+cookiecutter https://github.com/drivendata/cookiecutter-data-science
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: At the time of writing cookiecutter is moving to v2</p>
+</blockquote>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image1.png" alt=""></p>
+
+<p>The project structure will be created.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image2.png" alt=""></p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image3.png" alt=""></p>
+
+<h1 id="create-a-github-repository">
+<a class="anchor" href="#create-a-github-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a github repository</h1>
+
+<p>Create a github repository and push the current project to the repository. I am doing all the development in the main branch.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/kaushikdasroy/mlops_pipeline.git
+git push -u origin main
+</code></pre></div></div>
+
+<h1 id="download-data">
+<a class="anchor" href="#download-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download Data</h1>
+
+<p>I will train a simplistic model to predict customer churn. My focus here is to demo a ML Pipeline and a simple model will be sufficient for that purpose.</p>
+
+<p>I will train the model using data from a Kaggle competition.</p>
+
+<p>After login, accept the competition rules in Kaggle. Use the following command to download the [data] (https://www.kaggle.com/competitions/customer-churn-prediction-2020/data) in <code class="language-plaintext highlighter-rouge">data/external</code> location of the project structure. 
+You will also need to place kaggle.json file in ~/.kaggle</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install kaggle
+kaggle competitions download -c customer-churn-prediction-2020
+</code></pre></div></div>
+
+<p>There are few folders in the <code class="language-plaintext highlighter-rouge">/data</code> folder. 
+external: External files (ex. train.csv from Kaggle)
+raw: Raw data for this project
+Processed: Processed files using the raw files</p>
+
+<h1 id="dvc-for-data-version-control">
+<a class="anchor" href="#dvc-for-data-version-control" aria-hidden="true"><span class="octicon octicon-link"></span></a>DVC for data version control</h1>
+
+<p>Comment <code class="language-plaintext highlighter-rouge">/data/</code> in the <code class="language-plaintext highlighter-rouge">.gitignore</code> file as we are going to use DVC to track data version</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image4.png" alt=""></p>
+
+<p>Install DVC and initialize it to track the <code class="language-plaintext highlighter-rouge">data</code> folder. I will use <code class="language-plaintext highlighter-rouge">git</code> for code version control and <code class="language-plaintext highlighter-rouge">DVC</code> for data version control.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install dvc
+dvc init
+git commit -m "Initialize DVC"
+dvc add data/external/train.csv
+</code></pre></div></div>
+
+<p>This will create a separate <code class="language-plaintext highlighter-rouge">.dvcignore</code> file.
+A file <code class="language-plaintext highlighter-rouge">train.csv.dvc</code> will be created inside <code class="language-plaintext highlighter-rouge">/data/external</code> as the <code class="language-plaintext highlighter-rouge">train.csv</code> getting versioned.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image5.png" alt=""></p>
+
+<h1 id="source-code">
+<a class="anchor" href="#source-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Source code</h1>
+
+<p>There are 4 folders namely data, features, models and visualization inside the <code class="language-plaintext highlighter-rouge">/src</code> folder. <code class="language-plaintext highlighter-rouge">params.yaml</code> file needs to be created inside the <code class="language-plaintext highlighter-rouge">mlops_pipeline</code> folder which will manage all project level configurations.</p>
+
+<p>Following python scripts are placed in the <code class="language-plaintext highlighter-rouge">data</code> and <code class="language-plaintext highlighter-rouge">models</code> folders.</p>
+
+<p>data: Data loading related python scripts (load_data.py, split_data.py)</p>
+
+<p>models: Model-related python scripts (train_model.py, production_model_selection.py, model_monitor.py)</p>
+
+<p>Create the <code class="language-plaintext highlighter-rouge">params.yaml</code> file in the <code class="language-plaintext highlighter-rouge">mlops_pipeline</code> folder to add the project configurations as below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>external_data_config:
+  external_data_csv: data/external/train.csv
+
+raw_data_config:
+  raw_data_csv: data/raw/train.csv
+  model_var: ['churn','number_vmail_messages','total_day_calls','total_eve_minutes','total_eve_charge','total_intl_minutes','number_customer_service_calls']
+  train_test_split_ratio: 0.2
+  target: churn
+  random_state: 111
+  new_train_data_csv: data/raw/train_new.csv
+
+processed_data_config:
+  train_data_csv: data/processed/churn_train.csv
+  test_data_csv:  data/processed/churn_test.csv
+
+mlflow_config:
+  artifacts_dir: artifacts
+  experiment_name: model_iteration1
+  run_name: random_forest
+  registered_model_name: random_forest_model
+  remote_server_uri: http://localhost:1234
+
+random_forest:
+  max_depth: 10
+  n_estimators: 30
+
+model_dir: models/model.joblib
+
+model_webapp_dir: webapp/model_webapp_dir/model.joblib
+
+model_monitor:
+  target_col_name: target
+  monitor_dashboard_html: reports/data_and_target_drift_dashboard.html
+</code></pre></div></div>
+
+<p>Create a load_data.py file in the src/data folder. This script is to load an external train.csv file to the data/raw folder.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import yaml
+import argparse
+import numpy as np 
+import pandas as pd 
+
+def read_params(config_path):
+    """
+    read parameters from the params.yaml file
+    input: params.yaml location
+    output: parameters as dictionary
+    """
+    with open(config_path) as yaml_file:
+        config = yaml.safe_load(yaml_file)
+    return config
+
+def load_data(data_path,model_var):
+    """
+    load csv dataset from given path
+    input: csv path 
+    output:pandas dataframe 
+    note: Only 6 variables are used in this model building stage for the simplicity.
+    """
+    df = pd.read_csv(data_path, sep=",", encoding='utf-8')
+    df=df[model_var]
+    return df
+
+def load_raw_data(config_path):
+    """
+    load data from external location(data/external) to the raw folder(data/raw) with train and teting dataset 
+    input: config_path 
+    output: save train file in data/raw folder 
+    """
+    config=read_params(config_path)
+    external_data_path=config["external_data_config"]["external_data_csv"]
+    raw_data_path=config["raw_data_config"]["raw_data_csv"]
+    model_var=config["raw_data_config"]["model_var"]
+    
+    df=load_data(external_data_path,model_var)
+    df.to_csv(raw_data_path,index=False)
+    
+if __name__ == "__main__":
+    args = argparse.ArgumentParser()
+    args.add_argument("--config", default="params.yaml")
+    parsed_args = args.parse_args()
+    load_raw_data(config_path=parsed_args.config)
+    
+</code></pre></div></div>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">split_data.py</code> script in the <code class="language-plaintext highlighter-rouge">src/data</code> folder. Purpose of this script is to split the <code class="language-plaintext highlighter-rouge">train.csv</code> file in the <code class="language-plaintext highlighter-rouge">raw/data</code> folder into <code class="language-plaintext highlighter-rouge">churn_train.csv</code> and <code class="language-plaintext highlighter-rouge">churn_test.csv</code> files in the <code class="language-plaintext highlighter-rouge">data/processed</code> folder.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import os
+import argparse
+import pandas as pd
+from load_data import read_params
+from sklearn.model_selection import train_test_split
+
+def split_data(df,train_data_path,test_data_path,split_ratio,random_state):
+    train, test = train_test_split(df, test_size=split_ratio, random_state=random_state)
+    train.to_csv(train_data_path, sep=",", index=False, encoding="utf-8")
+    test.to_csv(test_data_path, sep=",", index=False, encoding="utf-8")    
+
+def split_and_saved_data(config_path):
+    """
+    split the train dataset(data/raw) and save it in the data/processed folder
+    input: config path 
+    output: save splitted files in output folder
+    """
+    config = read_params(config_path)
+    raw_data_path = config["raw_data_config"]["raw_data_csv"]
+    test_data_path = config["processed_data_config"]["test_data_csv"] 
+    train_data_path = config["processed_data_config"]["train_data_csv"]
+    split_ratio = config["raw_data_config"]["train_test_split_ratio"]
+    random_state = config["raw_data_config"]["random_state"]
+    raw_df=pd.read_csv(raw_data_path)
+    split_data(raw_df,train_data_path,test_data_path,split_ratio,random_state)
+    
+if __name__=="__main__":
+    args = argparse.ArgumentParser()
+    args.add_argument("--config", default="params.yaml")
+    parsed_args = args.parse_args()
+    split_and_saved_data(config_path=parsed_args.config)
+</code></pre></div></div>
+
+<p>Model training script <code class="language-plaintext highlighter-rouge">train_model.py</code> is at <code class="language-plaintext highlighter-rouge">src/models</code> directory.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import json
+import yaml
+import joblib
+import mlflow
+import argparse
+import numpy as np
+import pandas as pd
+from urllib.parse import urlparse
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import f1_score,recall_score,accuracy_score,precision_score,confusion_matrix,classification_report
+
+def read_params(config_path):
+    """
+    read parameters from the params.yaml file
+    input: params.yaml location
+    output: parameters as dictionary
+    """
+    with open(config_path) as yaml_file:
+        config = yaml.safe_load(yaml_file)
+    return config
+
+def accuracymeasures(y_test,predictions,avg_method):
+    accuracy = accuracy_score(y_test, predictions)
+    precision = precision_score(y_test, predictions, average=avg_method)
+    recall = recall_score(y_test, predictions, average=avg_method)
+    f1score = f1_score(y_test, predictions, average=avg_method)
+    target_names = ['0','1']
+    print("Classification report")
+    print("---------------------","\n")
+    print(classification_report(y_test, predictions,target_names=target_names),"\n")
+    print("Confusion Matrix")
+    print("---------------------","\n")
+    print(confusion_matrix(y_test, predictions),"\n")
+
+    print("Accuracy Measures")
+    print("---------------------","\n")
+    print("Accuracy: ", accuracy)
+    print("Precision: ", precision)
+    print("Recall: ", recall)
+    print("F1 Score: ", f1score)
+
+    return accuracy,precision,recall,f1score
+
+def get_feat_and_target(df,target):
+    """
+    Get features and target variables seperately from given dataframe and target 
+    input: dataframe and target column
+    output: two dataframes for x and y 
+    """
+    x=df.drop(target,axis=1)
+    y=df[[target]]
+    return x,y    
+
+def train_and_evaluate(config_path):
+    config = read_params(config_path)
+    train_data_path = config["processed_data_config"]["train_data_csv"]
+    test_data_path = config["processed_data_config"]["test_data_csv"]
+    target = config["raw_data_config"]["target"]
+    max_depth=config["random_forest"]["max_depth"]
+    n_estimators=config["random_forest"]["n_estimators"]
+
+    train = pd.read_csv(train_data_path, sep=",")
+    test = pd.read_csv(test_data_path, sep=",")
+    train_x,train_y=get_feat_and_target(train,target)
+    test_x,test_y=get_feat_and_target(test,target)
+
+################### MLFLOW ###############################
+    mlflow_config = config["mlflow_config"]
+    remote_server_uri = mlflow_config["remote_server_uri"]
+
+    mlflow.set_tracking_uri(remote_server_uri)
+    mlflow.set_experiment(mlflow_config["experiment_name"])
+
+    with mlflow.start_run(run_name=mlflow_config["run_name"]) as mlops_run:
+        model = RandomForestClassifier(max_depth=max_depth,n_estimators=n_estimators)
+        model.fit(train_x, train_y)
+        y_pred = model.predict(test_x)
+        accuracy,precision,recall,f1score = accuracymeasures(test_y,y_pred,'weighted')
+
+        mlflow.log_param("max_depth",max_depth)
+        mlflow.log_param("n_estimators", n_estimators)
+
+        mlflow.log_metric("accuracy", accuracy)
+        mlflow.log_metric("precision", precision)
+        mlflow.log_metric("recall", recall)
+        mlflow.log_metric("f1_score", f1score)
+       
+        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
+
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(
+                model, 
+                "model", 
+                registered_model_name=mlflow_config["registered_model_name"])
+        else:
+            mlflow.sklearn.load_model(model, "model")
+ 
+if __name__=="__main__":
+    args = argparse.ArgumentParser()
+    args.add_argument("--config", default="params.yaml")
+    parsed_args = args.parse_args()
+    train_and_evaluate(config_path=parsed_args.config)
+</code></pre></div></div>
+
+<p>The script <code class="language-plaintext highlighter-rouge">production_model_selection.py</code> will select the best model from the model registry and save it in the model directory. The best model is selected using the accuracy score.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import joblib
+import mlflow
+import argparse
+from pprint import pprint
+from train_model import read_params
+from mlflow.tracking import MlflowClient
+
+def log_production_model(config_path):
+    config = read_params(config_path)
+    mlflow_config = config["mlflow_config"] 
+    model_name = mlflow_config["registered_model_name"]
+    model_dir = config["model_dir"]
+    remote_server_uri = mlflow_config["remote_server_uri"]
+
+    mlflow.set_tracking_uri(remote_server_uri)
+    runs = mlflow.search_runs(experiment_ids=1)
+    max_accuracy = max(runs["metrics.accuracy"])
+    max_accuracy_run_id = list(runs[runs["metrics.accuracy"] == max_accuracy]["run_id"])[0]
+    
+    client = MlflowClient()
+    for mv in client.search_model_versions(f"name='{model_name}'"):
+        mv = dict(mv)
+
+        if mv["run_id"] == max_accuracy_run_id:
+            current_version = mv["version"]
+            logged_model = mv["source"]
+            pprint(mv, indent=4)
+            client.transition_model_version_stage(
+                name=model_name,
+                version=current_version,
+                stage="Production"
+            )
+        else:
+            current_version = mv["version"]
+            client.transition_model_version_stage(
+                name=model_name,
+                version=current_version,
+                stage="Staging"
+            )        
+
+    loaded_model = mlflow.pyfunc.load_model(logged_model)
+    joblib.dump(loaded_model, model_dir)
+
+if __name__ == '__main__':
+    args = argparse.ArgumentParser()
+    args.add_argument("--config", default="params.yaml")
+    parsed_args = args.parse_args()
+    data = log_production_model(config_path=parsed_args.config)
+    
+</code></pre></div></div>
+
+<h1 id="create-training-pipeline">
+<a class="anchor" href="#create-training-pipeline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create training pipeline</h1>
+
+<p>A DVC pipeline will be created to execute the model. First lets create a dvc.yaml file inside <code class="language-plaintext highlighter-rouge">mlops_pipeline</code> directory.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stages:
+  raw_dataset_creation:
+    cmd: python src/data/load_data.py --config=params.yaml
+    deps:
+    - src/data/load_data.py
+    - data/external/train.csv
+    outs:
+    - data/raw/train.csv
+  
+  split_data:
+    cmd: python src/data/split_data.py --config=params.yaml
+    deps:
+    - src/data/split_data.py
+    - data/raw/train.csv
+    outs:
+    - data/processed/churn_train.csv
+    - data/processed/churn_test.csv
+
+  model_train:
+    cmd: python src/models/train_model.py --config=params.yaml
+    deps:
+    - data/processed/churn_train.csv
+    - data/processed/churn_test.csv
+    - src/models/train_model.py
+    params:
+    - random_forest.max_depth
+    - random_forest.n_estimators
+
+  log_production_model:
+    cmd: python src/models/production_model_selection.py --config=params.yaml
+    deps:
+    - src/models/production_model_selection.py
+    params:
+    - random_forest.max_depth
+    - random_forest.n_estimators
+    outs:
+    - models/model.joblib
+</code></pre></div></div>
+
+<h1 id="run-pipeline">
+<a class="anchor" href="#run-pipeline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run pipeline</h1>
+
+<p>First start the mlflow tracking. I will use an AWS postgresql RDS database along with AWS S3 to start the mlflow server. Use <a href="https://blog.uplandr.com/mlops/mlflow/2022/01/30/install-mlflow-on-aws.html">this</a> post as a guide to start mlflow on AWS.</p>
+
+<p>Install <code class="language-plaintext highlighter-rouge">aws cli</code> and run <code class="language-plaintext highlighter-rouge">aws configuration</code> from the EC2 environment.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt  install awscli
+aws configuration
+</code></pre></div></div>
+
+<p>Provide AWS access key and secret from AWS IAM console. Please check <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html">here</a> for detailed steps.</p>
+
+<p>Also, change the <code class="language-plaintext highlighter-rouge">params.yaml</code> to reflect correct MLFLOW tracking URI</p>
+
+<p>Run DVC repro to start the pipeline. DVC pipeline only executes the steps which are gone through some changes.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dvc repro
+</code></pre></div></div>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image6.png" alt=""></p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image7.png" alt=""></p>
+
+<p>The pipeline will train a new model if we change any of the dependent parameters in the <code class="language-plaintext highlighter-rouge">model_train</code> stage. If we change <code class="language-plaintext highlighter-rouge">max_depth</code> and <code class="language-plaintext highlighter-rouge">n_estimators</code> values in the <code class="language-plaintext highlighter-rouge">param.yaml</code> file and rerun <code class="language-plaintext highlighter-rouge">dvc repro</code> a new run will be logged with metrics.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image8.png" alt=""></p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image9.png" alt=""></p>
+
+<p>The model is stored in the <code class="language-plaintext highlighter-rouge">models</code> folder.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image10.png" alt=""></p>
+
+<h1 id="web-app-with-flask">
+<a class="anchor" href="#web-app-with-flask" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web app with Flask</h1>
+
+<p>Flask is a web framework for python. This is a simple framework for exposing models for consumption over the web.
+In our example, we will enter the feature values on a web page and the model will predict churn or not.</p>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">webapp</code> folder and put required CSS, HTML, Javascript files inside the folder. Get the files from <a href="https://github.com/shanakaChathu/churn_model/tree/main/webapp">here</a>. Move the model file <code class="language-plaintext highlighter-rouge">model.joblib</code> from the <code class="language-plaintext highlighter-rouge">models</code> folder to <code class="language-plaintext highlighter-rouge">webapp/model_webapp_dir</code> folder.</p>
+
+<p>Create the python code related to the web app in <code class="language-plaintext highlighter-rouge">app.py</code> file. Place the file in the <code class="language-plaintext highlighter-rouge">mlops_pipeline</code> folder.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image11.png" alt=""></p>
+
+<p><code class="language-plaintext highlighter-rouge">app.py</code> code</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from flask import Flask, render_template, request, jsonify
+import os
+import numpy as np
+import yaml
+import joblib 
+
+webapp_root = "webapp"
+params_path = "params.yaml"
+
+static_dir = os.path.join(webapp_root, "static")
+template_dir = os.path.join(webapp_root, "templates")
+
+app = Flask(__name__, static_folder=static_dir,template_folder=template_dir)
+
+class  NotANumber(Exception):
+    def __init__(self, message="Values entered are not Numerical"):
+        self.message = message
+        super().__init__(self.message)
+
+def read_params(config_path):
+    with open(config_path) as yaml_file:
+        config = yaml.safe_load(yaml_file)
+    return config
+
+def predict(data):
+    config = read_params(params_path)
+    model_dir_path = config["model_webapp_dir"]
+    model = joblib.load(model_dir_path)
+    prediction = model.predict(data).tolist()[0]
+    return prediction 
+
+def validate_input(dict_request):
+    for _, val in dict_request.items():
+        try:
+            val=float(val)
+        except Exception as e:
+            raise NotANumber
+    return True
+
+def form_response(dict_request):
+    try:
+        if validate_input(dict_request):
+            data = dict_request.values()
+            data = [list(map(float, data))]
+            response = predict(data)
+            return response
+    except NotANumber as e:
+        response =  str(e)
+        return response 
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        try:
+            if request.form:
+                dict_req = dict(request.form)
+                response = form_response(dict_req)
+                return render_template("index.html", response=response)
+        except Exception as e:
+            print(e)
+            error = {"error": "Something went wrong!! Try again later!"}
+            error = {"error": e}
+            return render_template("404.html", error=error)
+    else:
+        return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
+    
+</code></pre></div></div>
+
+<h1 id="unit-test-using-pytest">
+<a class="anchor" href="#unit-test-using-pytest" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unit test using Pytest</h1>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">tests</code> folder inside <code class="language-plaintext highlighter-rouge">mlops_pipeline</code>. Then create <code class="language-plaintext highlighter-rouge">test_config.py</code> and <code class="language-plaintext highlighter-rouge">__init__.py</code> scripts inside the <code class="language-plaintext highlighter-rouge">tests</code> folder.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from app import form_response 
+
+class  NotANumber(Exception):
+    def __init__(self, message="Values entered are not Numerical"):
+        self.message = message
+        super().__init__(self.message)
+
+input_data = {
+    "incorrect_values": 
+    {"number_vmail_messages": 3, 
+    "total_day_calls": 4, 
+    "total_eve_minutes": 'as', 
+    "total_eve_charge": 12, 
+    "total_intl_minutes": 1, 
+    "number_customer_service_calls": 'ab', 
+    },
+
+    "correct_values": 
+    {"number_vmail_messages": 3, 
+    "total_day_calls": 4, 
+    "total_eve_minutes": 2, 
+    "total_eve_charge": 12, 
+    "total_intl_minutes": 1, 
+    "number_customer_service_calls": 4, 
+    }
+}
+
+def test_form_response_incorrect_values(data=input_data["incorrect_values"]):
+    res=form_response(data)
+    assert res == NotANumber().message
+
+</code></pre></div></div>
+
+<p>It is a simple test to check if the input values are numerical. Function names start with <code class="language-plaintext highlighter-rouge">test</code>. The test sends incorrect data to the form and gets a response. Run the test using command</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest -v
+</code></pre></div></div>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image12.png" alt=""></p>
+
+<h1 id="create-an-app-in-heroku">
+<a class="anchor" href="#create-an-app-in-heroku" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create an app in Heroku</h1>
+
+<p>Signup in Heroku.com and create an app and authorization token.</p>
+
+<p>Start with the link  https://dashboard.heroku.com/apps. Create a new app; I have named the app <code class="language-plaintext highlighter-rouge">mlopspipeline</code>. Choose the deployment method as <code class="language-plaintext highlighter-rouge">github</code>. Choose the github repo and connect with it. In the automatic deployment, pick wait for CI to pass before deploying and click enable the automatic deploy button. Create authorization by going to settings followed by application &gt; authorization &gt; create authorization. Pick, create and copy the authorization token generated.</p>
+
+<h1 id="create-ci-cd-pipeline-using-github-actions">
+<a class="anchor" href="#create-ci-cd-pipeline-using-github-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create CI-CD pipeline using Github Actions</h1>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">ci-cd.yaml</code> file in <code class="language-plaintext highlighter-rouge">.github/workflows</code> location. Update the file with the following code.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: Python application
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Test
+      env:
+        TEST_GITHUB_TOKEN: $
+        TEST_SECRET: $
+      run: |
+        echo ${#TEST_GITHUB_TOKEN}
+        echo ${#TEST_SECRET}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        pytest -v
+    - name: Deploy to Heroku
+      env:
+        HEROKU_API_TOKEN: $
+        HEROKU_APP_NAME: $
+      if: github.ref == 'refs/heads/main' &amp;&amp; job.status == 'success'
+      run: |
+        git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
+        git push heroku HEAD:main -f
+        
+</code></pre></div></div>
+
+<p>Whenever a change is pushed to the github repo, github action runs the ci-cd.yaml file steps and updates the heroku app.</p>
+
+<p>There are two pieces of information that need to be passed to github actions. Heroku app name and Heroku API token. These two are passed by updating github repository secrets. Set <code class="language-plaintext highlighter-rouge">HEROKU_APP_NAME</code> secret to the heroku app name, in my case <code class="language-plaintext highlighter-rouge">mlopspipeline</code> and <code class="language-plaintext highlighter-rouge">HEROKU_API_TOKEN</code> secret to heroku app token.</p>
+
+<h1 id="create-a-procfile-for-heroku-to-start-the-process">
+<a class="anchor" href="#create-a-procfile-for-heroku-to-start-the-process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a “Procfile” for Heroku to start the process</h1>
+
+<p>Create a file named “Procfile”, with capital P, at the root of the project folder structure and add following line</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web gunicorn app:app
+</code></pre></div></div>
+
+<p>Heroku checks for the procfile to know the commands to execute. 
+Ensure <code class="language-plaintext highlighter-rouge">gunicorn</code> is provided in the <code class="language-plaintext highlighter-rouge">requirements.txt</code> file for Heroku to set the environment with <code class="language-plaintext highlighter-rouge">gunicorn</code>. The command is asking Heroku to start launching the <code class="language-plaintext highlighter-rouge">app.py</code>.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image14.png" alt=""></p>
+
+<h1 id="push-code-to-github">
+<a class="anchor" href="#push-code-to-github" aria-hidden="true"><span class="octicon octicon-link"></span></a>Push code to Github</h1>
+
+<p>If the code is pushed to github repo, github actions will push the app to Heroku. Let us push the code to github repo.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image13.png" alt=""></p>
+
+<h1 id="check-the-app-in-heroku-provided-domain">
+<a class="anchor" href="#check-the-app-in-heroku-provided-domain" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check the App in Heroku provided Domain</h1>
+
+<p>Check the domain name in Heroku app settings and open the url.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image15.png" alt=""></p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image16.png" alt=""></p>
+
+<h1 id="run-some-tests-with-numeric-and-non-numeric-data">
+<a class="anchor" href="#run-some-tests-with-numeric-and-non-numeric-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run some tests with Numeric and Non-numeric data</h1>
+
+<p>Prediction with all numeric data.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image17.png" alt=""></p>
+
+<p>Predict request sent with wrong data type</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image18.png" alt=""></p>
+
+<h1 id="model-monitoring-with-evidentlyai">
+<a class="anchor" href="#model-monitoring-with-evidentlyai" aria-hidden="true"><span class="octicon octicon-link"></span></a>Model monitoring with EvidentlyAI</h1>
+
+<p>Install EvidentlyAI</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install evidently
+</code></pre></div></div>
+
+<p><a href="www.evidentlyai.com">Evidently</a> is a drift monitoring tool with capabilities to monitor data drift, feature drift, target drift etc.</p>
+
+<p>Create <code class="language-plaintext highlighter-rouge">model_monitoring.py</code> file within <code class="language-plaintext highlighter-rouge">src/models</code> and add following code</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import yaml
+import argparse
+import pandas as pd
+from evidently.dashboard import Dashboard
+from evidently.tabs import DataDriftTab,CatTargetDriftTab
+
+def read_params(config_path):
+    """
+    read parameters from the params.yaml file
+    input: params.yaml location
+    output: parameters as dictionary
+    """
+    with open(config_path) as yaml_file:
+        config = yaml.safe_load(yaml_file)
+    return config
+
+def model_monitoring(config_path):
+    config = read_params(config_path)
+    train_data_path = config["raw_data_config"]["raw_data_csv"]
+    new_train_data_path=config["raw_data_config"]["new_train_data_csv"]
+    target = config["raw_data_config"]["target"]
+    monitor_dashboard_path = config["model_monitor"]["monitor_dashboard_html"]
+    monitor_target = config["model_monitor"]["target_col_name"]
+
+    ref=pd.read_csv(train_data_path)
+    cur=pd.read_csv(new_train_data_path)
+
+    ref=ref.rename(columns ={target:monitor_target}, inplace = False)
+    cur=cur.rename(columns ={target:monitor_target}, inplace = False)
+    
+    data_and_target_drift_dashboard = Dashboard(tabs=[DataDriftTab(), CatTargetDriftTab()])
+    data_and_target_drift_dashboard.calculate(ref,cur, column_mapping = None)
+    data_and_target_drift_dashboard.save(monitor_dashboard_path)
+
+if __name__=="__main__":
+    args = argparse.ArgumentParser()
+    args.add_argument("--config", default="params.yaml")
+    parsed_args = args.parse_args()
+    model_monitoring(config_path=parsed_args.config)
+    
+</code></pre></div></div>
+
+<p>Keep the new training data in <code class="language-plaintext highlighter-rouge">train_new.csv</code> in <code class="language-plaintext highlighter-rouge">data/raw</code></p>
+
+<p>After successful run of the script, a html report will be generated with the feature drifts shown in various plots.</p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image19.png" alt=""></p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image20.png" alt=""></p>
+
+<p><img src="/images/2022-03-24-End-to-end-ml-pipeline/image21.png" alt=""></p>
+
+<p>Evidently drift results can be used to trigger retraining jobs, if the drift is more than acceptable. Will cover that in a separate post.</p>
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="kaushikdasroy/my_fastpages"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/mlops/mlflow/dvc/evidentlyai/cookiecutter/github%20actions/heroku/2022/03/24/End-to-end-ml-pipeline.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <!--
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        -->
+      </div>
+      <div class="footer-col">
+        <p>Amazing technology</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
